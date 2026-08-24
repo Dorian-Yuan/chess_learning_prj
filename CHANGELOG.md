@@ -221,3 +221,10 @@
 - **首页对局设置简化**：对局模式明确为"人机对弈 / 自由推演"两个入口；执子按钮简化为"执白 / 执黑 / 随机"；页头描述精简。
 - **设置页开关重构**："显示棋盘坐标"与"落子与走棋音效"由并排按钮改为**标准滑动开关（Switch）**，标题居左、开关居右；切换即时生效并 Toast 提示。
 - SW `CACHE_NAME` 升至 `chess-learning-v10`。
+
+## [v0.1.18] - 2026-08-25
+
+### 新增 (Added)
+- **GitHub Pages 部署**：项目上传至 GitHub（Dorian-Yuan/chess_learning_prj，公开仓库），配置 GitHub Actions 工作流自动构建（VITE_BASE 子路径）并部署 Pages，站点 https://dorian-yuan.github.io/chess_learning_prj/ ；本地部署保持根路径模式（start.bat 不变）。
+- **子路径适配**：vite base 环境变量化、Service Worker 与 manifest 相对路径化、SW 注册与资源引用全部支持任意部署前缀（离线可用性在子路径下保持）。
+- **.env 本地配置**：Agnes AI（api.agnes-ai.cn 与 Key）写入 .env 并加入 .gitignore，不随仓库提交。

@@ -1,0 +1,432 @@
+[
+  {
+    "id": "pawn",
+    "name": "Pawn",
+    "nameZh": "兵 / 卒",
+    "symbol": "P",
+    "role": "pawn",
+    "pieceValue": 1,
+    "icon": "shield",
+    "badge": "基础基石",
+    "shortDesc": "只能向前直走，初始可走两格，斜前方一格吃子，抵达底线可升变。",
+    "fullRules": {
+      "movement": "只能向前移动，不能后退或横走。从原始位置（第2横线/第7横线）出发时，可选择前进1格或2格；离开初始格后每次只能前进1格。",
+      "capture": "行进走直线，但吃子必须为斜前方1格的敌方棋子（直进斜吃）。",
+      "special": "拥有【兵的升变】（到达对方底线时升变为后/车/象/马）与【吃过路兵】两种专属特殊规则。"
+    },
+    "pieceTips": {
+      "keyPoints": [
+        "首步可自由选择前进一格或两格，快速占领中心格",
+        "直进斜吃：正前方受阻无法前进，但斜前方一格有敌子可吃",
+        "冲至对方底线（第8横线）可立刻升变为后、车、象、马强力棋子"
+      ],
+      "summary": "国际象棋名言：『兵是国际象棋的灵魂』。构建稳固兵形、创造通路兵是取胜基石。"
+    },
+    "levels": [
+      {
+        "id": "pawn_1",
+        "title": "关卡 1 · 首步双格挺进",
+        "instruction": "白兵位于初始第 2 横线（e2）。请选择一口气向前推进两格，直接冲到 e4 中心控制要道！",
+        "hint": "将 e2 处的白兵拖拽或点击移动至 e4 格。",
+        "fen": "7k/8/8/8/8/8/4P3/K7 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "e2e4",
+          "e4"
+        ],
+        "successMessage": "漂亮！兵在初始位置拥有冲双步的特权，快速占领中心！"
+      },
+      {
+        "id": "pawn_2",
+        "title": "关卡 2 · 直进斜吃法则",
+        "instruction": "兵的移动走直线，但吃子必须是【斜前方一格】。请用 e4 处的白兵吃掉 d5 处的黑兵！",
+        "hint": "将 e4 的白兵斜向拖拽至 d5 格吃掉黑兵。",
+        "fen": "7k/8/8/3p4/4P3/8/8/K7 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "e4d5",
+          "exd5"
+        ],
+        "successMessage": "完美！谨记：直走斜吃，兵的前方如果被挡住则无法前进，但斜前方有敌子即可吃掉！"
+      },
+      {
+        "id": "pawn_3",
+        "title": "关卡 3 · 左右开弓任选吃子",
+        "instruction": "白兵在 d5，前方有两个黑卒分别在 c6 与 e6 斜前方。你可以任选一个吃掉它！",
+        "hint": "移动 d5 的白兵至 c6 或 e6。",
+        "fen": "7k/8/2p1p3/3P4/8/8/8/K7 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "d5c6",
+          "d5e6",
+          "dxc6",
+          "dxe6"
+        ],
+        "successMessage": "优秀！兵对斜前方左右两个格子均具有威慑与吃子控制力！"
+      },
+      {
+        "id": "pawn_4",
+        "title": "关卡 4 · 底线升变蜕变",
+        "instruction": "白兵已勇猛冲至第 7 横线（e7）！将它挺进至第 8 横线（e8），并在弹窗中选择升变为强大的【皇后】！",
+        "hint": "走 e7 到 e8，并在弹出选择中点击皇后。",
+        "fen": "8/4P3/7k/8/8/8/8/K7 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "e7e8q",
+          "e7e8r",
+          "e7e8b",
+          "e7e8n",
+          "e8=Q",
+          "e8=R",
+          "e8=B",
+          "e8=N"
+        ],
+        "successMessage": "太棒了！小兵变皇后，一举完成战力跃迁！"
+      }
+    ]
+  },
+  {
+    "id": "knight",
+    "name": "Knight",
+    "nameZh": "马 / 骑士",
+    "symbol": "N",
+    "role": "knight",
+    "pieceValue": 3,
+    "icon": "crosshair",
+    "badge": "八面玲珑",
+    "shortDesc": "走“L”型（日字），全盘唯一具备跨越其他棋子能力的奇兵，不受路径障碍阻隔。",
+    "fullRules": {
+      "movement": "移动轨迹为“L”型（即先走两格再转弯一格，或者先走一格再转弯两格）。在棋盘中央最多可控制 8 个落点。",
+      "capture": "吃子方式与移动方式完全相同：只要落点上有敌方棋子，即可直接吃掉并占据该格。",
+      "special": "【可越子】移动时不会被路径上的任何己方或敌方棋子阻挡。"
+    },
+    "pieceTips": {
+      "keyPoints": [
+        "拥有跨越障碍的特权，在拥挤密集的阵型中威力极大",
+        "每次跳跃必定改变所在格子的颜色（白格跳黑格，黑格跳白格）",
+        "在中心最多可控制 8 个格，在边角仅能控制 2~4 个格"
+      ],
+      "summary": "牢记国际象棋名言：『边角的马是笨拙的马』。尽量将马部署在中心前哨阵地。"
+    },
+    "levels": [
+      {
+        "id": "knight_1",
+        "title": "关卡 1 · 掌握“日”字跳跃",
+        "instruction": "白马位于 e4 中心。请将它跳到右上方 f6 处的控制要点！",
+        "hint": "将 e4 的马移动至 f6 格（横一竖二）。",
+        "fen": "k7/8/8/8/4N3/8/8/K7 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "e4f6",
+          "Nf6"
+        ],
+        "successMessage": "漂亮！感受马走“日”字的八面威风！"
+      },
+      {
+        "id": "knight_2",
+        "title": "关卡 2 · 跨越障碍轻巧跳出",
+        "instruction": "白马在 e2，正前方 e4 与 e5 分别有己方与敌方兵阻挡。请运用跨越特权直接越过障碍跳至 d4！",
+        "hint": "将 e2 的马直接跳跃至 d4 格。",
+        "fen": "7k/8/8/4p3/4P3/8/4N3/K7 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "e2d4",
+          "Nd4"
+        ],
+        "successMessage": "好棋！马具备跨越棋子的特权，在密集阵型中畅行无阻！"
+      },
+      {
+        "id": "knight_3",
+        "title": "关卡 3 · 迂回擒敌",
+        "instruction": "白马在 c2，黑卒在 f6。请第一步先跳到 d4 占领中心并瞄准黑卒！",
+        "hint": "走 c2 到 d4。",
+        "fen": "7k/8/5p2/8/8/8/2N5/K7 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "c2d4",
+          "Nd4"
+        ],
+        "successMessage": "出色！马通过连贯跳跃可以灵活穿梭全盘！"
+      },
+      {
+        "id": "knight_4",
+        "title": "关卡 4 · 马的致命击双",
+        "instruction": "黑方的车在 e8，后在 c8。白马在 e4，请找到一个能同时攻击黑车与黑后的神之一手！",
+        "hint": "跳到 d6 格（Nd6），同时攻击 e8 车与 c8 后！",
+        "fen": "k1q1r3/8/8/8/4N3/8/7K/8 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "e4d6",
+          "Nd6"
+        ],
+        "successMessage": "太犀利了！这就是马最擅长的战术特技——“击双”！"
+      }
+    ]
+  },
+  {
+    "id": "bishop",
+    "name": "Bishop",
+    "nameZh": "象 / 主教",
+    "symbol": "B",
+    "role": "bishop",
+    "pieceValue": 3,
+    "icon": "compass",
+    "badge": "斜向长虹",
+    "shortDesc": "只能斜向任意格滑行，终生锁定同色格，长距离狙击利器。",
+    "fullRules": {
+      "movement": "只能沿斜线方向滑行，格数不限，但不能跨越其他棋子。",
+      "capture": "在斜线滑行路径上遇到敌方棋子即可将其吃掉并停在该格。",
+      "special": "【单色格属性】白格象终生只能在白格活动，黑格象终生只能在黑格活动。双象协同可控制全盘。"
+    },
+    "pieceTips": {
+      "keyPoints": [
+        "白格象终生走白格，黑格象终生走黑格，双象协同可控制全盘",
+        "在开放局面中拥有极强的远距离穿透与压制力",
+        "避免己方中心兵堵塞己方象的行动斜线，保持象的斜线畅通"
+      ],
+      "summary": "保留『双象优势』在中残局往往具有显著的战术与子力压制力。"
+    },
+    "levels": [
+      {
+        "id": "bishop_1",
+        "title": "关卡 1 · 斜贯全盘长驱直入",
+        "instruction": "白象位于 a1 底角白格。请一口气斜向跨越整个棋盘，飞到右上角 h8！",
+        "hint": "将 a1 的白象拖至 h8。",
+        "fen": "k7/8/8/8/8/8/8/B3K3 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "a1h8",
+          "Bh8"
+        ],
+        "successMessage": "畅快淋漓！长距离斜线滑行，象是强大的远距离狙击手！"
+      },
+      {
+        "id": "bishop_2",
+        "title": "关卡 2 · 单色格狙击",
+        "instruction": "白象在 d4（白格），目标黑卒在 f6（白格）。请斜向出击吃掉黑卒！",
+        "hint": "走 d4 到 f6 吃子。",
+        "fen": "k7/8/5p2/8/3B4/8/8/K7 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "d4f6",
+          "Bxf6"
+        ],
+        "successMessage": "击中目标！白格象永远只能控制白格，因此双象互补至关重要！"
+      },
+      {
+        "id": "bishop_3",
+        "title": "关卡 3 · 远程歼灭敌车",
+        "instruction": "白象在 g2，黑车在遥远的 a8。请运用大斜线视野将黑车斩落马下！",
+        "hint": "走 g2 到 a8 吃掉黑车。",
+        "fen": "r6k/8/8/8/8/8/6B1/4K3 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "g2a8",
+          "Bxa8"
+        ],
+        "successMessage": "漂亮！大斜线上的象威力往往能匹敌重子！"
+      }
+    ]
+  },
+  {
+    "id": "rook",
+    "name": "Rook",
+    "nameZh": "车 / 城堡",
+    "symbol": "R",
+    "role": "rook",
+    "pieceValue": 5,
+    "icon": "box",
+    "badge": "重炮铁壁",
+    "shortDesc": "横平竖直滑行任意格，控制开放线与通路，可与王进行“王车易位”。",
+    "fullRules": {
+      "movement": "沿横线与竖线直线滑行，格数不限，不能跨越棋子。",
+      "capture": "在直线路径上遇到敌方棋子即可将其吃掉并停在该格。",
+      "special": "可与王协同执行【王车易位】特殊防御移位。"
+    },
+    "pieceTips": {
+      "keyPoints": [
+        "横竖直线滑行格数不限，在开放竖线上穿透力最强",
+        "开局应尽快完成王车易位，出动轻子后实现双车连通",
+        "车进占第 7 横线（次底线）具有极强的横扫兵群与威胁王位的威力"
+      ],
+      "summary": "控制开放线并将车调入敌方次底线，是中局与残局致胜的强力利器。"
+    },
+    "levels": [
+      {
+        "id": "rook_1",
+        "title": "关卡 1 · 竖线直通底线",
+        "instruction": "白车在 a1，面前是一条畅通无阻的开放 a 竖线。请将白车直接开到底线 a8！",
+        "hint": "将 a1 白车向上拖动至 a8。",
+        "fen": "8/7k/8/8/8/8/8/R6K w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "a1a8",
+          "Ra8"
+        ],
+        "successMessage": "势不可挡！车在开放线上拥有无与伦比的穿透力！"
+      },
+      {
+        "id": "rook_2",
+        "title": "关卡 2 · 横向拦腰横扫",
+        "instruction": "白车在 a4，沿着第 4 横线高速巡航，吃掉 e4 处的黑卒！",
+        "hint": "走 a4 到 e4 吃掉黑卒。",
+        "fen": "7k/8/8/8/R3p3/8/8/K7 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "a4e4",
+          "Rxe4"
+        ],
+        "successMessage": "精准命中！横向调动是车控制全局的重要手段！"
+      },
+      {
+        "id": "rook_3",
+        "title": "关卡 3 · 进驻次底线封锁",
+        "instruction": "白车在 d2，请将车推进至第 7 横线（d7），建立压制阵地！",
+        "hint": "走 d2 到 d7。",
+        "fen": "7k/8/8/8/8/8/3R4/K7 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "d2d7",
+          "Rd7"
+        ],
+        "successMessage": "威慑力十足！车进次底线（第 7 横线）在国象中常被称作“次底线野猪”，破坏力极强！"
+      }
+    ]
+  },
+  {
+    "id": "queen",
+    "name": "Queen",
+    "nameZh": "后 / 皇后",
+    "symbol": "Q",
+    "role": "queen",
+    "pieceValue": 9,
+    "icon": "sparkles",
+    "badge": "全能制霸",
+    "shortDesc": "兼具车与象的全部走法，横、竖、斜任意格滑行，全盘最强单兵。",
+    "fullRules": {
+      "movement": "可以沿横线、竖线或斜线向任意方向滑行任意格数，不能跨越棋子。",
+      "capture": "遇到路径上的第一个敌方棋子即可将其吃掉。",
+      "special": "虽然威力极其庞大，但开局不宜过早出后，避免被对方轻子攻击而频繁躲避浪费先手。"
+    },
+    "pieceTips": {
+      "keyPoints": [
+        "全盘最强攻击力，子力价值相当于 9 个兵或 车+马+兵",
+        "开局不宜过早出后，避免被对方轻子攻击而频繁躲避丢失先手",
+        "中局常与象、马、车协同发起强力攻王战术"
+      ],
+      "summary": "保护好你的皇后！善用皇后的多向机动性寻找击双与将死杀局。"
+    },
+    "levels": [
+      {
+        "id": "queen_1",
+        "title": "关卡 1 · 车象合一的威力",
+        "instruction": "白后在 a1，请斜向飞跃到中心 d4 黄金位置！",
+        "hint": "走 a1 到 d4。",
+        "fen": "8/7k/8/8/8/8/8/Q3K3 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "a1d4",
+          "Qd4"
+        ],
+        "successMessage": "太强了！后可以像车一样直走，也可以像象一样斜行！"
+      },
+      {
+        "id": "queen_2",
+        "title": "关卡 2 · 四面八方精准猎杀",
+        "instruction": "白后在 d4，斜上方 a7 处有一个落单黑卒。请皇后出击吃掉黑卒！",
+        "hint": "走 d4 到 a7 吃掉黑卒。",
+        "fen": "2k5/p7/8/8/3Q4/8/8/K7 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "d4a7",
+          "Qxa7",
+          "d4xa7"
+        ],
+        "successMessage": "手到擒来！在皇后的广阔视线内，没有任何角落是安全的！"
+      },
+      {
+        "id": "queen_3",
+        "title": "关卡 3 · 直捣敌阵要害",
+        "instruction": "白后在 e4，敌方弱点在 e7。请将皇后直插 e7 建立绝对压制！",
+        "hint": "走 e4 到 e7 吃子或占位。",
+        "fen": "2k5/4p3/8/8/4Q3/8/8/K7 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "e4e7",
+          "Qxe7",
+          "e4xe7"
+        ],
+        "successMessage": "所向披靡！后通常是主导将死攻击的终极重炮！"
+      }
+    ]
+  },
+  {
+    "id": "king",
+    "name": "King",
+    "nameZh": "王 / 国王",
+    "symbol": "K",
+    "role": "king",
+    "pieceValue": "无限",
+    "icon": "crown",
+    "badge": "统帅中枢",
+    "shortDesc": "周围 8 格每次走 1 格，全军唯一不可被吃的中枢，绝不可走到被将军格。",
+    "fullRules": {
+      "movement": "可以向周围 8 个相邻方格移动 1 格。",
+      "capture": "只要相邻格子上的敌方棋子未受到其他棋子保护，王即可直接将其吃掉。",
+      "special": "【不可送吃】严禁将王走到任何受到敌方攻击的格子上；被将军时必须立即应将；无法应将即判负（将死）。"
+    },
+    "pieceTips": {
+      "keyPoints": [
+        "全盘中枢，不可被吃，被将军时必须立即应将（吃/垫/逃）",
+        "开局和中局要通过王车易位尽快把王隐藏在坚固兵阵后方",
+        "进入残局且双方大子减少后，王必须大胆走到中心参战支援己方兵升变"
+      ],
+      "summary": "『开局中局王要藏，残局王要当战将』——这是国际象棋经典的用王准则。"
+    },
+    "levels": [
+      {
+        "id": "king_1",
+        "title": "关卡 1 · 周围八格稳健漫步",
+        "instruction": "白王在 e4。周围 8 个格皆在掌中。请将白王移至右上邻格 f5！",
+        "hint": "走 e4 到 f5。",
+        "fen": "k7/8/8/8/4K3/8/8/8 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "e4f5",
+          "Kf5"
+        ],
+        "successMessage": "很好！王每步走一格，步伐沉稳统御全局！"
+      },
+      {
+        "id": "king_2",
+        "title": "关卡 2 · 避开危险攻击火线",
+        "instruction": "黑车占据了第 3 横线（c3），王不可自投罗网走入第 3 横线。请将 e2 的王退回第 1 横线的安全格 e1！",
+        "hint": "走 e2 到 e1 或 d1 或 f1。",
+        "fen": "7k/8/8/8/8/2r5/4K3/8 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "e2e1",
+          "e2d1",
+          "e2f1",
+          "Ke1",
+          "Kd1",
+          "Kf1"
+        ],
+        "successMessage": "明智之举！王绝不能主动走到任何受敌方控制的格子上！"
+      },
+      {
+        "id": "king_3",
+        "title": "关卡 3 · 近身搏杀歼敌",
+        "instruction": "黑卒孤身在 e3，身后没有任何子力保护。白王在 e2，可以直接吃掉它！",
+        "hint": "走 e2 到 e3 吃掉黑卒。",
+        "fen": "k7/8/8/8/8/4p3/4K3/8 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": [
+          "e2e3",
+          "Kxe3"
+        ],
+        "successMessage": "御驾亲征！残局中王是保护己方兵、消灭敌方落单兵的关键战力！"
+      }
+    ]
+  }
+]

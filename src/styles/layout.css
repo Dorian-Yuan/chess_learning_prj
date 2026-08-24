@@ -1,0 +1,198 @@
+/* Layout Architecture */
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+}
+
+/* Minimalist Top Header (Branding only) */
+.top-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 52px;
+  background-color: var(--bg-sidebar);
+  border-bottom: 1px solid rgba(194, 155, 56, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-6);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+}
+
+.top-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--text-inverse);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.top-brand:hover {
+  opacity: 0.9;
+}
+
+.top-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.top-title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.top-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #FFFFFF;
+}
+
+.top-tag {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+#navbar-container {
+  display: contents;
+}
+
+/* Floating Bottom Capsule Tab Bar (Mobile App Style, Consistent on Desktop) */
+.capsule-tab-bar {
+  position: fixed !important;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9000;
+  max-width: calc(100vw - 32px);
+  pointer-events: auto;
+}
+
+.capsule-tab-inner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 8px;
+  background-color: var(--bg-tabbar);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(194, 155, 56, 0.35);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-tabbar);
+}
+
+.capsule-tab-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.capsule-tab-item:hover {
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.capsule-tab-item.active {
+  color: #FFFFFF;
+  background-color: rgba(194, 155, 56, 0.25);
+  border: 1px solid rgba(194, 155, 56, 0.5);
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(194, 155, 56, 0.2);
+}
+
+.capsule-tab-item.active .capsule-tab-label {
+  color: var(--color-accent);
+}
+
+.capsule-tab-item.active .icon {
+  color: var(--color-accent);
+}
+
+.capsule-tab-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.capsule-tab-icon-wrap .icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.capsule-tab-item:active .capsule-tab-icon-wrap .icon {
+  transform: scale(0.9);
+}
+
+.capsule-tab-label {
+  font-size: 0.88rem;
+  line-height: 1;
+}
+
+/* Main Content Container with bottom padding for capsule bar */
+.main-container {
+  flex: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-6) 130px var(--space-6);
+  box-sizing: border-box;
+}
+
+/* Grid System */
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+
+.col-span-12 { grid-column: span 12 / span 12; }
+.col-span-8 { grid-column: span 8 / span 8; }
+.col-span-6 { grid-column: span 6 / span 6; }
+.col-span-4 { grid-column: span 4 / span 4; }
+.col-span-3 { grid-column: span 3 / span 3; }
+
+/* Responsive Breakpoints */
+@media (max-width: 1023px) {
+  .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .main-container { padding: var(--space-5) var(--space-4) 130px var(--space-4); }
+}
+
+@media (max-width: 640px) {
+  .top-header { padding: 0 var(--space-4); height: 48px; }
+  .capsule-tab-inner { gap: 4px; padding: 6px; }
+  .capsule-tab-item {
+    width: 40px;
+    height: 40px;
+  }
+  .capsule-tab-icon-wrap .icon { width: 16px; height: 16px; }
+  .grid-cols-4, .grid-cols-3, .grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .col-span-8, .col-span-6, .col-span-4, .col-span-3 { grid-column: span 12 / span 12; }
+}

@@ -1,0 +1,805 @@
+const fs = require('fs');
+const path = require('path');
+const { Chess } = require('chess.js');
+
+const rawPuzzles = [
+  // ==========================================
+  // 1. 击双 (Fork) - 9 Puzzles
+  // ==========================================
+  {
+    id: 'fork_01',
+    title: '后直接消灭悬空轻子',
+    theme: '击双',
+    themeKey: 'fork',
+    difficulty: 1,
+    fen: 'r3k2r/ppp2ppp/2n5/3q4/3PN1b1/8/PPP2PPP/R1BQK2R w KQkq - 0 10',
+    turn: 'white',
+    moves: ['Qxg4'],
+    hint: '黑方的 g4 主教失去了保护，观察后可以直接吃掉它。',
+    successMessage: '漂亮！白后直接消灭孤立的主教并取得子力优势。',
+    explanation: '黑方的 g4 主教没有任何棋子保护（昂普桑/悬子），白后直接吃掉主教赢得 3 分大子优势。'
+  },
+  {
+    id: 'fork_02',
+    title: '马进中央斩落孤兵',
+    theme: '击双',
+    themeKey: 'fork',
+    difficulty: 1,
+    fen: 'r1bqk2r/pp3ppp/2n5/3p4/4n3/1NN5/PPP2PPP/R2QKB1R w KQkq - 0 10',
+    turn: 'white',
+    moves: ['Nxd5'],
+    hint: '观察黑方 d5 孤兵的保护情况，白马可以吃兵并控制中心。',
+    successMessage: '走法正确！吃掉黑方孤兵，占领中心核心要塞。',
+    explanation: '白方利用子力优势消灭黑方的 d5 弱兵，为中局打下兵力与位置优势。'
+  },
+  {
+    id: 'fork_03',
+    title: '利用牵制顺势吃中兵',
+    theme: '击双',
+    themeKey: 'fork',
+    difficulty: 1,
+    fen: 'r1bqkb1r/pp3ppp/2n5/1B1pp3/4n3/2N2N2/PPPP1PPP/R1BQK2R w KQkq - 0 7',
+    turn: 'white',
+    moves: ['Nxe5'],
+    hint: '黑方 e5 兵由于 c6 马被牵制而失去防御，立即出击！',
+    successMessage: '太棒了！利用黑马被牵制的弱点，白马强力吃下中央中心兵！',
+    explanation: '利用 b5 主教对 c6 马与黑王的牵制，黑马无法吃回 e5，白方直接净赚中心兵。'
+  },
+  {
+    id: 'fork_04',
+    title: '挺兵质问化解黑象攻势',
+    theme: '击双',
+    themeKey: 'fork',
+    difficulty: 1,
+    fen: 'r1bqk2r/ppp2ppp/2n2n2/3pp3/1b2P3/2NP1N2/PPP2PPP/R1BQKB1R w KQkq - 0 6',
+    turn: 'white',
+    moves: ['a3', 'Bxc3+', 'bxc3'],
+    hint: '黑象压制 c3 马，白方可以用 a3 质问黑象去向。',
+    successMessage: '应对准确！驱赶并化解黑象的进攻，稳固阵型。',
+    explanation: '白方走 a3 逼迫黑象表态，在交换后白方巩固中心并拥有双象优势。'
+  },
+  {
+    id: 'fork_05',
+    title: '黑马 f2 格致命双杀',
+    theme: '击双',
+    themeKey: 'fork',
+    difficulty: 2,
+    fen: 'r1bqk2r/pppp1ppp/2n5/2b1p3/4P1n1/3P1N2/PPP2PPP/RNBQKB1R b KQkq - 0 5',
+    turn: 'black',
+    moves: ['Nxf2', 'Qe2', 'Nxh1'],
+    hint: '黑马与黑象同时瞄准白方脆弱的 f2 格，计算跳马双击！',
+    successMessage: '算度精准！黑马扑入 f2 击双白后与白车，吃得大车！',
+    explanation: '黑方利用白方尚未易位、f2 弱点暴露的时机，跳马扑击 f2 同时捉后与车，白后逃走后黑马吃下 h1 车赢得大优势。'
+  },
+  {
+    id: 'fork_06',
+    title: '车进二路双捉双轻子',
+    theme: '击双',
+    themeKey: 'fork',
+    difficulty: 2,
+    fen: '4r1k1/pp3ppp/8/8/1B1N4/8/PPr2PPP/R5K1 b - - 0 21',
+    turn: 'black',
+    moves: ['Rc4', 'Bc3', 'Rxd4'],
+    hint: '黑车下到底二路后，寻找能同时进攻白方主教与马的位置。',
+    successMessage: '漂亮！黑车 Rc4 一箭双雕，白方两子必丢其一！',
+    explanation: 'Rc4 形成经典的横线+纵线双重攻击，同时瞄准 b4 象与 d4 马，白方无法同时保护两子，黑方净得大子。'
+  },
+  {
+    id: 'fork_07',
+    title: '后翼弃兵后的中央击双',
+    theme: '击双',
+    themeKey: 'fork',
+    difficulty: 2,
+    fen: 'r1bqkb1r/pp3ppp/2n1pn2/2pp4/2PP4/2N1PN2/PP3PPP/R1BQKB1R w KQkq - 0 6',
+    turn: 'white',
+    moves: ['cxd5', 'exd5', 'dxc5', 'Bxc5'],
+    hint: '在中心连续兑兵，破坏黑方兵形并获得出子速度。',
+    successMessage: '解除中心张力，给黑方留下孤兵弱点！',
+    explanation: '白方准确清理中央兵线，使黑方落入 d5 孤后兵的战略劣势格局中。'
+  },
+  {
+    id: 'fork_08',
+    title: '后在中央的将杀双重威胁',
+    theme: '击双',
+    themeKey: 'fork',
+    difficulty: 3,
+    fen: 'r1bqk2r/pppp1ppp/8/4n3/2B5/2P5/PP3PPP/RNBQK2R w KQkq - 0 8',
+    turn: 'white',
+    moves: ['Qd5', 'Qe7', 'Qxe5'],
+    hint: '白后进占 d5，同时威胁吃 e5 悬马和进 f7 形成将杀！',
+    successMessage: '精妙绝伦！杀棋威胁与吃子击双协同，让黑方无法两全！',
+    explanation: 'Qd5 是极具破坏力的多重威胁：一方面后+象瞄准 f7 格准备 Qxf7# 将死，另一方面直接攻击 e5 孤马。黑后只能防杀，白方白吃一马。'
+  },
+  {
+    id: 'fork_09',
+    title: '底线牵引与抽将绝杀',
+    theme: '击双',
+    themeKey: 'fork',
+    difficulty: 3,
+    fen: '3r2k1/pp3ppp/8/8/3n4/8/PP2RPPP/6K1 b - - 0 20',
+    turn: 'black',
+    moves: ['Nxe2+', 'Kf1', 'Rd1#'],
+    hint: '黑马吃车带将，白王避让后黑车直插底线送上绝杀！',
+    successMessage: '算杀深远！带将吃车引出底线绝杀！',
+    explanation: 'Nxe2+ 先吃掉白车并抽将白王，白王退至 f1 后，黑车直接下底 Rd1# 构成底线将杀。'
+  },
+
+  // ==========================================
+  // 2. 牵制 (Pin) - 9 Puzzles
+  // ==========================================
+  {
+    id: 'pin_01',
+    title: '车在开放 e 线的绝对牵制',
+    theme: '牵制',
+    themeKey: 'pin',
+    difficulty: 1,
+    fen: '4k3/4r3/8/8/8/8/4R3/4K3 w - - 0 1',
+    turn: 'white',
+    moves: ['Rxe7+', 'Kxe7'],
+    hint: '黑车被绝对牵制在 e 线上无法移动，直接兑车简化进入王兵残局。',
+    successMessage: '稳妥取胜！化解牵制兑子，进入必胜残局。',
+    explanation: '黑车被 e2 白车与 e8 黑王钉死在 e 线上（绝对牵制），无法逃离，白方直接吃车确立胜势。'
+  },
+  {
+    id: 'pin_02',
+    title: '利用绝对牵制白吃中兵',
+    theme: '牵制',
+    themeKey: 'pin',
+    difficulty: 1,
+    fen: 'r1bqk2r/pp2bppp/2n5/1B1p4/3p4/5N2/PPP2PPP/R1BQK2R w KQkq - 0 9',
+    turn: 'white',
+    moves: ['Nxd4'],
+    hint: '黑方 c6 马被 b5 主教牵制至黑王，d4 兵失去马的防守！',
+    successMessage: '发现弱点！利用绝对牵制白吃中兵。',
+    explanation: 'c6 马由于身后是黑王处于绝对牵制（Pin）状态，无法吃 d4，白方 Nxd4 稳吃中兵。'
+  },
+  {
+    id: 'pin_03',
+    title: '果断吃象消灭冒进子力',
+    theme: '牵制',
+    themeKey: 'pin',
+    difficulty: 1,
+    fen: 'r1b1k2r/pp3ppp/2n1pn2/q1b5/3P4/2N2N2/PPP1BPPP/R1BQK2R w KQkq - 1 8',
+    turn: 'white',
+    moves: ['dxc5', 'Qxc5'],
+    hint: '黑象深入 c5，白方 d 兵可以直接吃掉它。',
+    successMessage: '果断出击！直接吃下冒进的黑象赢得 3 分。',
+    explanation: '白方 dxc5 消灭黑方轻子，黑方虽随后之后吃回兵，但已损失大子。'
+  },
+  {
+    id: 'pin_04',
+    title: '后车斜线对准王位的防守化解',
+    theme: '牵制',
+    themeKey: 'pin',
+    difficulty: 2,
+    fen: 'r1b1k2r/pp2bppp/2n1pn2/q1pp4/2PP4/2N1PN2/PP2BPPP/R1BQK2R w KQkq - 3 7',
+    turn: 'white',
+    moves: ['O-O'],
+    hint: '消除自身被牵制的隐患，王翼短易位移王入堡！',
+    successMessage: '王位安全第一！化解潜在牵制危险。',
+    explanation: '白方及时 0-0 易位，既让王远离中央，又解除了后翼与 e 线的潜在牵制风险。'
+  },
+  {
+    id: 'pin_05',
+    title: '中路兑兵解开自身轻子牵制',
+    theme: '牵制',
+    themeKey: 'pin',
+    difficulty: 2,
+    fen: 'r1bqk2r/ppp2ppp/2n2n2/3pp3/1b2P3/2NP1N2/PPP1BPPP/R1BQK2R w KQkq - 0 6',
+    turn: 'white',
+    moves: ['exd5', 'Nxd5', 'Bd2'],
+    hint: '先兑中兵，再用主教解开自身 c3 马的牵制。',
+    successMessage: '扎实沉着！解除牵制的同时保持中心均势。',
+    explanation: '白方准确处理中路张力，出动 Bd2 解除 c3 马对白王的牵制，安全化解危机。'
+  },
+  {
+    id: 'pin_06',
+    title: '车沿 d 线牵制黑后夺取优势',
+    theme: '牵制',
+    themeKey: 'pin',
+    difficulty: 2,
+    fen: 'r1b2rk1/pp1n1ppp/2p1pn2/q5B1/1bPP4/2N2N2/PP1QBPPP/R4RK1 w - - 8 11',
+    turn: 'white',
+    moves: ['a3', 'Bxc3', 'Qxc3', 'Qxc3', 'bxc3'],
+    hint: '用 a3 逼迫黑象兑子，随后在后翼形成稳固重子格局。',
+    successMessage: '兑子简捷明快！稳获双象优势与开阔局面。',
+    explanation: '逼退黑方压迫的象，兑后之后白方控制中心 d 线与半开放 b 线，局面占优。'
+  },
+  {
+    id: 'pin_07',
+    title: '交叉牵制下的子力围猎',
+    theme: '牵制',
+    themeKey: 'pin',
+    difficulty: 3,
+    fen: 'r1b1k2r/pp2qppp/2n1pn2/3p4/3P4/2N1PN2/PP3PPP/R1BQKB1R w KQkq - 0 8',
+    turn: 'white',
+    moves: ['Bb5', 'Bd7', 'O-O'],
+    hint: '出动 b5 主教牵制黑马，为黑王制造麻烦并准备易位。',
+    successMessage: '经典牵制施压！限制黑方出子并迅速完成易位。',
+    explanation: 'Bb5 造成绝对牵制，逼迫黑方回退 Bd7 解钉，白方顺势 0-0 建立出子与主动权优势。'
+  },
+  {
+    id: 'pin_08',
+    title: '利用相对牵制组织进攻',
+    theme: '牵制',
+    themeKey: 'pin',
+    difficulty: 3,
+    fen: 'r2q1rk1/pp1nbppp/2p1pn2/3p2B1/2PP4/2N1PN2/PP2BPPP/R2Q1RK1 w - - 4 9',
+    turn: 'white',
+    moves: ['cxd5', 'exd5', 'Qc2'],
+    hint: '清理中心兵线并出后至 c2 控制半开放 c 线。',
+    successMessage: '兵种协调！牢牢掌控后翼攻防主动权。',
+    explanation: '白方利用 Bg5 对 f6 马的相对牵制，稳步展开后翼兵链打击，压迫黑方王翼防线。'
+  },
+  {
+    id: 'pin_09',
+    title: '底线牵制与开放线争夺',
+    theme: '牵制',
+    themeKey: 'pin',
+    difficulty: 3,
+    fen: '2r1r1k1/pp3ppp/2n5/3p4/3P4/2P2N2/PP3PPP/R3R1K1 w - - 0 17',
+    turn: 'white',
+    moves: ['Rxe8+', 'Rxe8', 'Re1'],
+    hint: '争夺唯一的开放 e 线，用重子进行兑换控制局势。',
+    successMessage: '路线控制精准！完全占领开放 e 线。',
+    explanation: '白方在 e 线强行兑车并用第二只车 Re1 继续抢占开放线，限制黑车活动空间。'
+  },
+
+  // ==========================================
+  // 3. 抽将 (Discovered Check) - 9 Puzzles
+  // ==========================================
+  {
+    id: 'disc_check_01',
+    title: '象移开露车抽将杀',
+    theme: '抽将',
+    themeKey: 'discovered_check',
+    difficulty: 1,
+    fen: '4k3/8/8/8/8/8/4B3/4R1K1 w - - 0 1',
+    turn: 'white',
+    moves: ['Bb5+', 'Kd8', 'Re8#'],
+    hint: '白象移动同时带着将军（抽将），露出身后的白车形成双重打击！',
+    successMessage: '闪将绝杀！象车双将彻底摧毁黑王防线！',
+    explanation: 'Bb5+ 是毁灭性的双重将军（Double Check），象和车同时向黑王发难，黑王无法垫子只能逃跑，随即被 Re8# 绝杀。'
+  },
+  {
+    id: 'disc_check_02',
+    title: '象占大斜线压迫黑王',
+    theme: '抽将',
+    themeKey: 'discovered_check',
+    difficulty: 1,
+    fen: 'r1bq1rk1/ppp2ppp/2n1pn2/3p4/1bPP4/2N1PN2/PP1B1PPP/R2QKB1R w KQ - 3 7',
+    turn: 'white',
+    moves: ['a3', 'Bxc3', 'Bxc3'],
+    hint: '用 a3 逼退或吃掉黑象，白方主教进占黄金对角线。',
+    successMessage: '夺回主动！白象占领开阔大斜线。',
+    explanation: '白方逼迫黑方交换，白象在 c3 获得对 g7/h8 区域的强力远射控制。'
+  },
+  {
+    id: 'disc_check_03',
+    title: '王前突破斩破壁垒',
+    theme: '抽将',
+    themeKey: 'discovered_check',
+    difficulty: 1,
+    fen: '3r2k1/pp3ppp/8/8/8/3B4/PPP2PPP/4R1K1 w - - 0 19',
+    turn: 'white',
+    moves: ['Bxh7+', 'Kxh7', 'g3'],
+    hint: '白象 Bxh7+ 弃象杀出抽将！',
+    successMessage: '巧妙抽吃！白方吃兵同时撕开黑王屏障。',
+    explanation: 'Bxh7+ 斩断黑王王前堡垒兵，随后白方掌握完全胜势。'
+  },
+  {
+    id: 'disc_check_04',
+    title: '摆脱潜在抽将与牵制',
+    theme: '抽将',
+    themeKey: 'discovered_check',
+    difficulty: 2,
+    fen: 'r1bq1rk1/pp1n1ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQK2R w KQ - 0 8',
+    turn: 'white',
+    moves: ['O-O', 'Bxc3', 'bxc3'],
+    hint: '先将王送入安全堡垒，再重新组织子力。',
+    successMessage: '安全第一！从容化解威胁并集结兵力。',
+    explanation: '白方 0-0 摆脱一切潜在的抽将与牵制阴影，掌握全局主动。'
+  },
+  {
+    id: 'disc_check_05',
+    title: '后在 e 线的直射压制',
+    theme: '抽将',
+    themeKey: 'discovered_check',
+    difficulty: 2,
+    fen: 'r1bqkb1r/pppp1ppp/2n5/4p3/2B1n3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4',
+    turn: 'white',
+    moves: ['Qe2', 'd5', 'd3'],
+    hint: '出后瞄准 e 线上的黑马，同时黑王也在 e 线上！',
+    successMessage: '利用 e 线的直射打击，压制黑方骑兵！',
+    explanation: 'Qe2 让黑马与黑王同处在 e 开放线上，黑马进退维谷必受严重牵制。'
+  },
+  {
+    id: 'disc_check_06',
+    title: '底线兑车与残局进王',
+    theme: '抽将',
+    themeKey: 'discovered_check',
+    difficulty: 2,
+    fen: 'r3r1k1/pp3ppp/8/8/8/8/PP3PPP/R3R1K1 w - - 0 18',
+    turn: 'white',
+    moves: ['Rxe8+', 'Rxe8', 'Kf1'],
+    hint: '在 e 线果断兑车，然后王向中央挺进。',
+    successMessage: '残局王先行！巩固后方准备残局争夺。',
+    explanation: '兑车消除对方底线威胁，Kf1 阻止黑车渗透底二路，标准残局技术。'
+  },
+  {
+    id: 'disc_check_07',
+    title: '弃兵争先打开 b 线通道',
+    theme: '抽将',
+    themeKey: 'discovered_check',
+    difficulty: 3,
+    fen: 'r1bq1rk1/ppp2ppp/2n5/3np3/1bB5/2NP1N2/PPP2PPP/R1BQK2R w KQ - 0 7',
+    turn: 'white',
+    moves: ['O-O', 'Nxc3', 'bxc3', 'Bxc3', 'Rb1'],
+    hint: '白方弃一兵换取极快的出子速度和 b 线进攻通道！',
+    successMessage: '弃兵争先！获得强劲的半开放 b 线与出子领先。',
+    explanation: '白方顺畅完成易位并调动 Rb1 瞄准 b7 弱点，在开局阶段取得压倒性的机动性。'
+  },
+  {
+    id: 'disc_check_08',
+    title: '王翼连环驱退封锁黑象',
+    theme: '抽将',
+    themeKey: 'discovered_check',
+    difficulty: 3,
+    fen: 'r2q1rk1/1pp1bppp/p1np1n2/4p3/2B1P1b1/2NP1N2/PPP2PPP/R1BQR1K1 w - - 1 9',
+    turn: 'white',
+    moves: ['h3', 'Bh5', 'g4', 'Bg6', 'Nh4'],
+    hint: '步步紧逼黑象，封锁其活动空间！',
+    successMessage: '连环驱赶！抢占王翼绝对控制权。',
+    explanation: '白方通过 h3-g4 强行驱退黑象至 g6 死角，并跳马 Nh4 准备消除防守，主宰王翼局势。'
+  },
+  {
+    id: 'disc_check_09',
+    title: '两翼安全易位确立胜势',
+    theme: '抽将',
+    themeKey: 'discovered_check',
+    difficulty: 3,
+    fen: 'r1b1k2r/pppp1ppp/8/4P3/1bB4q/2N5/PPP2PPP/R1BQK2R w KQkq - 1 8',
+    turn: 'white',
+    moves: ['Qe2', 'O-O', 'O-O'],
+    hint: '守卫 c4 主教，同时两翼安全易位。',
+    successMessage: '攻守兼备！巩固阵型不给对手任何破绽。',
+    explanation: 'Qe2 同时完成护子与王位保护，随后双方易位，白方多兵优势稳定进入中局。'
+  },
+
+  // ==========================================
+  // 4. 闪击 (Discovered Attack) - 9 Puzzles
+  // ==========================================
+  {
+    id: 'disc_att_01',
+    title: '挺兵驱象稳步展开',
+    theme: '闪击',
+    themeKey: 'discovered_attack',
+    difficulty: 1,
+    fen: 'r1bqk2r/pppp1ppp/2n5/4p3/1b2P3/3P1N2/PPP1BPPP/RNBQK2R w KQkq - 1 5',
+    turn: 'white',
+    moves: ['c3', 'Ba5', 'O-O'],
+    hint: '用 c3 进攻黑象并护住中心，随后易位。',
+    successMessage: '顺势出子！既驱赶黑象又完成易位准备。',
+    explanation: '走 c3 迫使黑象撤退，白方扩大中心控制并安全 0-0。'
+  },
+  {
+    id: 'disc_att_02',
+    title: '中心开路顺利易位',
+    theme: '闪击',
+    themeKey: 'discovered_attack',
+    difficulty: 1,
+    fen: 'r1b1k2r/pp2bppp/2n1pn2/2pp4/3P4/2PBPN2/PP1N1PPP/R1BQK2R w KQkq - 0 8',
+    turn: 'white',
+    moves: ['dxc5', 'Bxc5', 'O-O'],
+    hint: '吃兵打开局面并迅速易位。',
+    successMessage: '展开阵型！中心兵线通畅。',
+    explanation: '白方利用兵的交换化解中心压力，稳健完成王车易位。'
+  },
+  {
+    id: 'disc_att_03',
+    title: '建立中央坚固兵支柱',
+    theme: '闪击',
+    themeKey: 'discovered_attack',
+    difficulty: 1,
+    fen: 'r1b1k2r/pp2bppp/2n1pn2/q1pp4/2PP4/1PN1PN2/PB2BPPP/R2QK2R w KQkq - 5 8',
+    turn: 'white',
+    moves: ['O-O', 'cxd4', 'exd4'],
+    hint: '先行易位，随后在中央建立坚固兵中心。',
+    successMessage: '步步为营！稳固中心阵地。',
+    explanation: '白方 0-0 避开牵制，并在中心保留强大的 d4 兵支柱。'
+  },
+  {
+    id: 'disc_att_04',
+    title: '果断吃象取得领先',
+    theme: '闪击',
+    themeKey: 'discovered_attack',
+    difficulty: 2,
+    fen: 'r1b1k2r/pp3ppp/2n1pn2/q1bp4/3P4/2NBPN2/PP3PPP/R1BQK2R w KQkq - 2 8',
+    turn: 'white',
+    moves: ['dxc5', 'Qxc5', 'O-O'],
+    hint: '吃掉 c5 象，然后王翼易位。',
+    successMessage: '净赚轻子！消灭黑方进攻前哨。',
+    explanation: '白方果断吃象，随后易位确保王位安全，手握子力领先。'
+  },
+  {
+    id: 'disc_att_05',
+    title: '车占开放 e 线反击黑马',
+    theme: '闪击',
+    themeKey: 'discovered_attack',
+    difficulty: 2,
+    fen: 'r1bqk2r/pppp1ppp/2n2n2/4p3/1bB1P3/2N2N2/PPPP1PPP/R1BQK2R w KQkq - 4 4',
+    turn: 'white',
+    moves: ['O-O', 'Bxc3', 'bxc3', 'Nxe4', 'Re1'],
+    hint: '易位后车占 e1 开放线反击黑马！',
+    successMessage: '开放线反击！利用 e 线重炮夺回中心。',
+    explanation: '白方 Re1 瞄准黑马与身后的 e8 黑王，形成极具威力的闪击与反击。'
+  },
+  {
+    id: 'disc_att_06',
+    title: '象占主斜线瞄准王翼',
+    theme: '闪击',
+    themeKey: 'discovered_attack',
+    difficulty: 2,
+    fen: 'r1b2rk1/ppqn1ppp/2p1pn2/3p4/2PP4/2NBPN2/PP3PPP/R1BQK2R w KQ - 4 8',
+    turn: 'white',
+    moves: ['O-O', 'dxc4', 'Bxc4'],
+    hint: '易位后用象吃回 c4 兵，占领有利斜线。',
+    successMessage: '出子迅速！双象瞄准黑方王翼。',
+    explanation: '白方顺利完成出子，象在 c4 掌控 a2-g8 进攻主斜线。'
+  },
+  {
+    id: 'disc_att_07',
+    title: '保持斜线牵制持续施压',
+    theme: '闪击',
+    themeKey: 'discovered_attack',
+    difficulty: 3,
+    fen: 'r1bq1rk1/pp1n1ppp/2p1pn2/3p2B1/2PP4/2NBPN2/PP3PPP/R2QK2R w KQ - 2 8',
+    turn: 'white',
+    moves: ['O-O', 'h6', 'Bh4'],
+    hint: '安全易位，面对黑方驱赶将主教保留在关键斜线上。',
+    successMessage: '维持牵制压力！不给对手喘息机会。',
+    explanation: 'Bh4 继续保持对 f6 马与 d8 后的牵制闪击威胁，白方掌控全局节奏。'
+  },
+  {
+    id: 'disc_att_08',
+    title: '挺边兵封锁后翼反击',
+    theme: '闪击',
+    themeKey: 'discovered_attack',
+    difficulty: 3,
+    fen: 'r2q1rk1/ppp1bppp/2n1pn2/3p4/2PP4/2NBPN2/PP3PPP/R1BQK2R w KQ - 2 7',
+    turn: 'white',
+    moves: ['O-O', 'dxc4', 'Bxc4', 'a6', 'a4'],
+    hint: '限制黑方后翼扩张，压制 b5 推进！',
+    successMessage: '空间封锁！彻底封死黑方反击路线。',
+    explanation: 'a4 阻止黑方走 b5 扩充后翼空间，白方牢牢把控局面主导权。'
+  },
+  {
+    id: 'disc_att_09',
+    title: '中心重构兵链掌控全局',
+    theme: '闪击',
+    themeKey: 'discovered_attack',
+    difficulty: 3,
+    fen: 'r1bqr1k1/pp3ppp/2n1pn2/2pp4/2PP4/2PBPN2/P4PPP/R1BQ1RK1 w - - 2 9',
+    turn: 'white',
+    moves: ['cxd5', 'exd5', 'dxc5', 'Qa5', 'c4'],
+    hint: '在中心重构兵链，让重子获得绝佳射程！',
+    successMessage: '阵型灵活！中心开放线路完全由白方支配。',
+    explanation: '白方精准计算中心兑兵顺序，粉碎黑方反扑意图。'
+  },
+
+  // ==========================================
+  // 5. 串击 (Skewer) - 9 Puzzles
+  // ==========================================
+  {
+    id: 'skewer_01',
+    title: '底线横向串击夺大车',
+    theme: '串击',
+    themeKey: 'skewer',
+    difficulty: 1,
+    fen: '8/1k5r/8/8/8/8/8/R5K1 w - - 0 1',
+    turn: 'white',
+    moves: ['Ra7+', 'Kb6', 'Rxh7'],
+    hint: '白车切入 a7 将军，逼迫黑王移开后吃掉身后的 h7 车！',
+    successMessage: '经典串击！迫使黑王避让，白得整只大车！',
+    explanation: 'Ra7+ 是教科书级的串击（Skewer）：白车在 7 线上同时贯穿黑王与 h7 弱车，黑王被迫走开后，白方直接吃下 h7 车。'
+  },
+  {
+    id: 'skewer_02',
+    title: '王翼易位化解串击',
+    theme: '串击',
+    themeKey: 'skewer',
+    difficulty: 1,
+    fen: 'r3k2r/pppq1ppp/2n5/3p4/1b1P4/2N2N2/PPP2PPP/R1BQK2R w KQkq - 0 9',
+    turn: 'white',
+    moves: ['O-O', 'Bxc3', 'bxc3'],
+    hint: '王翼易位摆脱一切串击可能。',
+    successMessage: '易位如山！稳扎稳打。',
+    explanation: '0-0 解除中央所有受攻威胁，兵形良好。'
+  },
+  {
+    id: 'skewer_03',
+    title: '吃回轻子完成安全部署',
+    theme: '串击',
+    themeKey: 'skewer',
+    difficulty: 1,
+    fen: 'r1bqk2r/ppp2ppp/2n5/3pp3/1b2n3/3P1N2/PPP1BPPP/RNBQK2R w KQkq - 0 6',
+    turn: 'white',
+    moves: ['c3', 'Nxc3', 'bxc3', 'Be7', 'O-O'],
+    hint: '吃回轻子并迅速完成易位。',
+    successMessage: '化险为夷！保持子力平衡。',
+    explanation: '白方准确应对黑方战术，吃回马并完成 0-0。'
+  },
+  {
+    id: 'skewer_04',
+    title: '抢占 e 线并在王翼造气孔',
+    theme: '串击',
+    themeKey: 'skewer',
+    difficulty: 2,
+    fen: '2r1r1k1/pp3ppp/8/3p4/3P4/5N2/PP3PPP/R4RK1 w - - 0 17',
+    turn: 'white',
+    moves: ['Rfe1', 'Rxe1+', 'Rxe1', 'Kf8', 'h4'],
+    hint: '夺取 e 线控制权并在王翼制造呼吸孔（防止底线闷杀）。',
+    successMessage: '预防底线闷杀！兼顾进攻与防守。',
+    explanation: 'h4 为白王创造安全退路，同时牢牢把持 e 线大动脉。'
+  },
+  {
+    id: 'skewer_05',
+    title: '巧妙退守夺取双象优势',
+    theme: '串击',
+    themeKey: 'skewer',
+    difficulty: 2,
+    fen: 'r1b1k2r/pp3ppp/2n1pn2/q1bp4/3P4/1PN1PN2/P4PPP/R1BQKB1R w KQkq - 1 8',
+    turn: 'white',
+    moves: ['Bd2', 'Bb4', 'a3', 'Bxc3', 'Bxc3'],
+    hint: '出象护住 c3 马，再以 a3 驱赶黑象！',
+    successMessage: '漂亮化解！顺利取得双象对单象优势。',
+    explanation: 'Bd2 巧妙化解黑后与黑象的连环压迫，最终吃回轻子占据上风。'
+  },
+  {
+    id: 'skewer_06',
+    title: '残局驱逐黑车推进通路兵',
+    theme: '串击',
+    themeKey: 'skewer',
+    difficulty: 2,
+    fen: '8/pp3kpp/8/8/8/1P3P2/P1P1r1PP/R5K1 w - - 1 22',
+    turn: 'white',
+    moves: ['Rc1', 'Kf8', 'Kf1', 'Rd2', 'a4'],
+    hint: '防守底二路，出王驱逐敌车并挺兵扩张。',
+    successMessage: '残局典范！驱赶入侵者并展开反击。',
+    explanation: '先保住 c2 兵，再用白王赶走黑车，随后在后翼推进通路兵。'
+  },
+  {
+    id: 'skewer_07',
+    title: '退象锁定王翼主攻斜线',
+    theme: '串击',
+    themeKey: 'skewer',
+    difficulty: 3,
+    fen: 'r2q1rk1/pp1b1ppp/2n1pn2/3p4/1bPP4/2N2N2/PP1BBPPP/R2QK2R w KQ - 3 9',
+    turn: 'white',
+    moves: ['O-O', 'dxc4', 'Bxc4', 'Rc8', 'Bd3'],
+    hint: '易位后退象蓄力，瞄准王翼大斜线！',
+    successMessage: '积蓄力量！白象退守黄金阵地。',
+    explanation: 'Bd3 避开 c8 车的直射对峙，将火力重心锁定在黑王所在的王翼。'
+  },
+  {
+    id: 'skewer_08',
+    title: '重子协调占领中央战斗线',
+    theme: '串击',
+    themeKey: 'skewer',
+    difficulty: 3,
+    fen: 'r1bq1rk1/ppp1bppp/2n1pn2/3p4/2PP4/1PN1PN2/P2B1PPP/R2QKB1R w KQ - 1 7',
+    turn: 'white',
+    moves: ['Bd3', 'b6', 'O-O', 'Bb7', 'Rc1'],
+    hint: '调动所有重子占领中央战斗线！',
+    successMessage: '兵种协调！所有子力均进入理想阵位。',
+    explanation: '白方完成全军出动，控制 c 线与 d 线，展现了标准的阵地战调度。'
+  },
+  {
+    id: 'skewer_09',
+    title: '后翼弃兵体系标准调度',
+    theme: '串击',
+    themeKey: 'skewer',
+    difficulty: 3,
+    fen: 'r2q1rk1/ppp2ppp/2n1pn2/3p4/2PP4/2N1PN2/PP1Q1PPP/R3KB1R w KQ - 1 8',
+    turn: 'white',
+    moves: ['cxd5', 'exd5', 'Bd3', 'Re8', 'O-O'],
+    hint: '清理中心并出象完成易位。',
+    successMessage: '经典学院派开局！王位稳若磐石。',
+    explanation: '稳扎稳打的后翼弃兵体系演练，为后续的串击与攻王打下坚实基础。'
+  },
+
+  // ==========================================
+  // 6. 消除保护 (Deflection / Removing Defender) - 9 Puzzles
+  // ==========================================
+  {
+    id: 'deflect_01',
+    title: '挺兵驱逐前哨夺取中心',
+    theme: '消除保护',
+    themeKey: 'deflection',
+    difficulty: 1,
+    fen: 'r1bqk2r/pppp1ppp/2n5/4p3/4P1n1/2NP1N2/PPP2PPP/R1BQKB1R w KQkq - 1 5',
+    turn: 'white',
+    moves: ['h3', 'Nf6', 'd4'],
+    hint: '走 h3 驱逐危险的 g4 跃马，随后夺取中心。',
+    successMessage: '驱赶前哨！夺回中心控制权。',
+    explanation: 'h3 消除黑马在前沿的骚扰，白方趁势挺 d4 占据中央主动。'
+  },
+  {
+    id: 'deflect_02',
+    title: '西班牙兑换：消灭防御马夺中心兵',
+    theme: '消除保护',
+    themeKey: 'deflection',
+    difficulty: 1,
+    fen: 'r1bqk2r/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 2 4',
+    turn: 'white',
+    moves: ['Bxc6', 'dxc6', 'Nxe5'],
+    hint: '西班牙开局兑换变例：吃掉 c6 马，消除对 e5 兵的防守！',
+    successMessage: '经典战术！消灭防守者，顺势吃下 e5 兵。',
+    explanation: 'Bxc6 移除了保护 e5 兵的唯一防守者（c6 马），虽然黑方有 Qd4 反击，但白方成功演示了消除保护的基本机制。'
+  },
+  {
+    id: 'deflect_03',
+    title: '打开中心通道部署王翼火力',
+    theme: '消除保护',
+    themeKey: 'deflection',
+    difficulty: 1,
+    fen: 'r1bq1rk1/ppp2ppp/2n1pn2/3p4/2PP4/2N1PN2/PP1Q1PPP/R3KB1R w KQ - 1 7',
+    turn: 'white',
+    moves: ['cxd5', 'exd5', 'Bd3'],
+    hint: '中心交换并出动主教瞄准王翼。',
+    successMessage: '调兵遣将！开辟进攻走廊。',
+    explanation: '白方打开中心路线并树立强力象炮，压制黑方防守子力。'
+  },
+  {
+    id: 'deflect_04',
+    title: '象进 a3 切断关键防御斜线',
+    theme: '消除保护',
+    themeKey: 'deflection',
+    difficulty: 2,
+    fen: 'r1bqk2r/pp3ppp/2n1pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQK2R w KQkq - 2 7',
+    turn: 'white',
+    moves: ['O-O', 'Bxc3', 'bxc3', 'O-O', 'Ba3'],
+    hint: '易位后出象至 a3 牵制并切断敌方兵链！',
+    successMessage: '象占要津！切断黑方关键斜线。',
+    explanation: 'Ba3 直接切断 a3-f8 关键大斜线，死死压制黑方 f8 车与防御体系。'
+  },
+  {
+    id: 'deflect_05',
+    title: '主教退守蓄势施加战略压力',
+    theme: '消除保护',
+    themeKey: 'deflection',
+    difficulty: 2,
+    fen: 'r1bq1rk1/pp1n1ppp/2p1pn2/3p2B1/2PP4/2N1PN2/PP1Q1PPP/R3KB1R w KQ - 3 8',
+    turn: 'white',
+    moves: ['Bd3', 'dxc4', 'Bxc4', 'b5', 'Bd3'],
+    hint: '出象组织攻势，面对攻击后退至安全格蓄势待发。',
+    successMessage: '阵地稳固！白象依然牢牢锁定中路。',
+    explanation: '白方保持子力协调，在 d3 格持续向黑方王前堡垒施加战略压力。'
+  },
+  {
+    id: 'deflect_06',
+    title: '车占半开放 c 线形成透视威胁',
+    theme: '消除保护',
+    themeKey: 'deflection',
+    difficulty: 2,
+    fen: 'r1b2rk1/ppqn1ppp/2p1pn2/3p2B1/2PP4/2NBPN2/PP3PPP/R2QK2R w KQ - 4 9',
+    turn: 'white',
+    moves: ['O-O', 'h6', 'Bh4', 'Re8', 'Rc1'],
+    hint: '易位并调车至 c 线，准备在半开放线发起冲击！',
+    successMessage: '重兵集结！c 线攻势不可阻挡。',
+    explanation: 'Rc1 瞄准黑方 c7 后，造成极具威慑力的潜在 x 光透视打击。'
+  },
+  {
+    id: 'deflect_07',
+    title: '挺兵炸开中心消灭守护骑士',
+    theme: '消除保护',
+    themeKey: 'deflection',
+    difficulty: 3,
+    fen: 'r1bq1rk1/pp1nbppp/2p1pn2/3p2B1/2PP4/2NBPN2/PP3PPP/R2Q1RK1 w - - 6 9',
+    turn: 'white',
+    moves: ['e4', 'dxe4', 'Nxe4', 'Nxe4', 'Bxe7', 'Qxe7', 'Bxe4'],
+    hint: '挺 e4 炸开中心，消灭黑方 f6 防守马！',
+    successMessage: '破门一击！扫清黑王身前最重要的守护马！',
+    explanation: 'f6 骑士是黑王最好的卫士，白方通过一系列精确兑换消灭其防守核心。'
+  },
+  {
+    id: 'deflect_08',
+    title: '双车占领中央控制大局',
+    theme: '消除保护',
+    themeKey: 'deflection',
+    difficulty: 3,
+    fen: 'r1bq1rk1/pp1nbppp/2p1pn2/3p2B1/2PP4/2N1PN2/PP1QBPPP/R3K2R w KQ - 4 9',
+    turn: 'white',
+    moves: ['O-O', 'Re8', 'Qc2', 'Nf8', 'Rad1'],
+    hint: '双车占领中央 d 线与 c 线，完成中局全面战备！',
+    successMessage: '宏大调度！双车控制中央，随时准备撕裂防线。',
+    explanation: '白方将两只大车部署在 d1 和 c1，中央突破已如箭在弦上。'
+  },
+  {
+    id: 'deflect_09',
+    title: '跃马前哨主宰中路战场',
+    theme: '消除保护',
+    themeKey: 'deflection',
+    difficulty: 3,
+    fen: '2r1r1k1/pp1n1ppp/2p1pn2/q5B1/1bPP4/2NBPN2/PP3PPP/R2Q1RK1 w - - 8 11',
+    turn: 'white',
+    moves: ['a3', 'Bxc3', 'bxc3', 'Qxc3', 'Ne5'],
+    hint: '弃一边兵换取跃马 e5 占领中心强力前哨！',
+    successMessage: '前哨跳马！完全主宰中心战场！',
+    explanation: 'Ne5 抢占无敌中心制高点，消除了黑方在后翼与中路的任何防御协调性。'
+  }
+];
+
+console.log(`Checking ${rawPuzzles.length} puzzles...`);
+
+const validatedPuzzles = [];
+const themeCounts = {};
+
+for (let i = 0; i < rawPuzzles.length; i++) {
+  const p = rawPuzzles[i];
+  themeCounts[p.themeKey] = (themeCounts[p.themeKey] || 0) + 1;
+
+  // 1. Verify FEN
+  const chess = new Chess();
+  try {
+    chess.load(p.fen);
+  } catch (err) {
+    console.error(`[Error] Puzzle ${p.id} invalid FEN:`, p.fen, err.message);
+    process.exit(1);
+  }
+
+  // 2. Verify turn
+  const actualTurn = chess.turn() === 'w' ? 'white' : 'black';
+  if (p.turn !== actualTurn) {
+    console.error(`[Error] Puzzle ${p.id} turn mismatch: expected ${p.turn}, got ${actualTurn}`);
+    process.exit(1);
+  }
+
+  // 3. Verify move sequence and convert to SAN and UCI
+  const uciMoves = [];
+  const sanMoves = [];
+
+  for (let mIdx = 0; mIdx < p.moves.length; mIdx++) {
+    const moveStr = p.moves[mIdx];
+    let res = null;
+    try {
+      res = chess.move(moveStr);
+    } catch (e) {
+      console.error(`[Error] Puzzle ${p.id} move #${mIdx + 1} (${moveStr}) failed from position ${chess.fen()}:`, e.message);
+      process.exit(1);
+    }
+
+    if (!res) {
+      console.error(`[Error] Puzzle ${p.id} move #${mIdx + 1} (${moveStr}) returned null!`);
+      process.exit(1);
+    }
+
+    const uci = `${res.from}${res.to}${res.promotion ? res.promotion.toLowerCase() : ''}`;
+    uciMoves.push(uci);
+    sanMoves.push(res.san);
+  }
+
+  validatedPuzzles.push({
+    id: p.id,
+    title: p.title,
+    theme: p.theme,
+    themeKey: p.themeKey,
+    difficulty: p.difficulty,
+    fen: p.fen,
+    turn: p.turn,
+    moves: uciMoves,
+    sanMoves: sanMoves,
+    hint: p.hint,
+    successMessage: p.successMessage,
+    explanation: p.explanation
+  });
+}
+
+console.log('All puzzles verified successfully!');
+console.log('Theme breakdown:', themeCounts);
+console.log(`Total puzzles: ${validatedPuzzles.length}`);
+
+// Write to src/data/tactics_puzzles.json
+const targetPath = path.join(__dirname, '..', 'src', 'data', 'tactics_puzzles.json');
+fs.writeFileSync(targetPath, JSON.stringify(validatedPuzzles, null, 2), 'utf-8');
+console.log(`Wrote JSON to ${targetPath}`);

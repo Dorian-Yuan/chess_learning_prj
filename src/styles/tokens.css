@@ -1,0 +1,133 @@
+:root,
+:root[data-theme="light"] {
+  /* 基础背景与纸张色 (浅色模式) */
+  --bg-app: #F9F8F6;               /* 羊皮纸暖白底色 */
+  --bg-surface: #FFFFFF;           /* 内容卡片纯白 */
+  --bg-surface-subtle: #F3F1ED;    /* 次级卡片与控制区底色 */
+  --bg-sidebar: #101826;           /* 深色侧边/顶栏底色 */
+  --bg-tabbar: rgba(16, 24, 38, 0.92); /* 底部胶囊栏底色 */
+
+  /* 品牌主色与点缀色 */
+  --color-primary: #14213D;        /* 牛津暗蓝（主要文字/标题） */
+  --color-primary-hover: #1E325C;
+  --color-accent: #C29B38;         /* 典雅复古金（高亮/选中/徽章/胜利提示） */
+  --color-accent-hover: #A8832A;   /* 金色悬停 */
+  --color-danger: #9E2A2B;         /* 枣红（将军危险/错误走法提示） */
+  --color-success: #2B7A4B;        /* 松石绿（走法正确/战术通过） */
+
+  /* 按钮专用色 */
+  --btn-primary-bg: #14213D;
+  --btn-primary-text: #FFFFFF;
+  --btn-primary-hover: #1E325C;
+
+  /* 文字色阶 */
+  --text-main: #1C1917;            /* 正文主文字（极深暖灰炭黑） */
+  --text-muted: #57534E;           /* 次级说明文字 */
+  --text-tertiary: #8C8883;        /* 辅助/占位文字 */
+  --text-inverse: #FFFFFF;         /* 反色白字 */
+
+  /* 边框与分割线 */
+  --border-light: #E7E5E0;         /* 卡片柔和边框 */
+  --border-strong: #1C1917;        /* 强调边框 */
+
+  /* 阴影 */
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 2px 8px rgba(20, 33, 61, 0.06);
+  --shadow-modal: 0 10px 25px rgba(20, 33, 61, 0.15);
+  --shadow-tabbar: 0 8px 30px rgba(0, 0, 0, 0.28);
+
+  /* 国际象棋棋盘标准色 (默认经典木纹) */
+  --board-light-sq: #F0D9B5;       /* 浅色格（枫木乳白） */
+  --board-dark-sq: #B58863;        /* 深色格（胡桃木棕） */
+  --board-highlight: rgba(20, 33, 61, 0.4); /* 走法目标点圆点 */
+  --board-last-move: rgba(194, 155, 56, 0.45); /* 上一步格子高亮 */
+}
+
+/* 深色模式全局调色板 */
+:root[data-theme="dark"],
+html[data-theme="dark"] {
+  /* 基础背景与纸张色 (深色模式) */
+  --bg-app: #121316;               /* 深灰炭黑底色 */
+  --bg-surface: #1C1E24;           /* 卡片深色底色 */
+  --bg-surface-subtle: #252831;    /* 次级卡片与控制区底色 */
+  --bg-sidebar: #0D0E11;           /* 顶栏底色 */
+  --bg-tabbar: rgba(20, 22, 28, 0.94); /* 底部胶囊栏深色底色 */
+
+  /* 品牌主色与点缀色 */
+  --color-primary: #E2E8F0;        /* 亮色主文字/标题 */
+  --color-primary-hover: #F8FAFC;
+  --color-accent: #D4AF37;         /* 暖金点缀 */
+  --color-accent-hover: #E5C158;
+  --color-danger: #EF4444;         /* 亮红 */
+  --color-success: #10B981;        /* 翠绿 */
+
+  /* 按钮专用色 */
+  --btn-primary-bg: #C29B38;
+  --btn-primary-text: #0F172A;
+  --btn-primary-hover: #D4AF37;
+
+  /* 文字色阶 */
+  --text-main: #F8FAFC;            /* 主文字纯净亮白 */
+  --text-muted: #94A3B8;           /* 次级文字冷灰 */
+  --text-tertiary: #64748B;        /* 辅助文字深灰 */
+  --text-inverse: #0F172A;         /* 反色深字 */
+
+  /* 边框与分割线 */
+  --border-light: #2D323F;         /* 暗调柔和边框 */
+  --border-strong: #4B5563;        /* 强调边框 */
+
+  /* 阴影 */
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --shadow-modal: 0 12px 30px rgba(0, 0, 0, 0.7);
+  --shadow-tabbar: 0 8px 30px rgba(0, 0, 0, 0.6);
+
+  /* 棋盘高亮在深色模式适配 */
+  --board-highlight: rgba(212, 175, 55, 0.45);
+  --board-last-move: rgba(212, 175, 55, 0.4);
+}
+
+/* 棋盘主题扩展 (独立于浅/深色模式) */
+:root[data-board-theme="wood"] {
+  --board-light-sq: #F0D9B5;
+  --board-dark-sq: #B58863;
+}
+
+:root[data-board-theme="blue"] {
+  --board-light-sq: #DEE3E6;
+  --board-dark-sq: #8CA2AD;
+}
+
+:root[data-board-theme="green"] {
+  --board-light-sq: #FFFFDD;
+  --board-dark-sq: #86A666;
+}
+
+:root[data-board-theme="classic"] {
+  --board-light-sq: #ECECEC;
+  --board-dark-sq: #556270;
+}
+
+:root {
+  /* 字体系统 (5.3) */
+  --font-serif: "Playfair Display", "Cinzel", "Georgia", "Songti SC", "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+
+  /* 间距与圆角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 9999px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+}

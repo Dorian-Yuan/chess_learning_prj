@@ -1,0 +1,221 @@
+[
+  {
+    "id": "castling",
+    "title": "王车易位",
+    "titleEn": "Castling",
+    "badge": "防御与连通核心",
+    "icon": "shield",
+    "shortDesc": "全盘唯一一步棋同时移动王和车的特殊机制，分为王翼短易位 (0-0) 与后翼长易位 (0-0-0)。",
+    "conditionList": [
+      "王和参与易位的车在此之前【从未移动过】",
+      "王与车之间【没有任何其他棋子】阻隔",
+      "王当前【未被将军】",
+      "王穿越的格子与最终到达的格子【未受到敌方棋子攻击】"
+    ],
+    "rulesExplanation": [
+      "王翼易位（短易位 0-0）：王向右移动两格至 g1（黑方 g8），车跳至 f1（黑方 f8）。",
+      "后翼易位（长易位 0-0-0）：王向左移动两格至 c1（黑方 c8），车跳至 d1（黑方 d8）。",
+      "禁例：不能在受将军时易位应将；不能穿过受攻击格；车被攻击不影响易位（只要王经过的格安全）。"
+    ],
+    "levels": [
+      {
+        "id": "castling_1",
+        "title": "关卡 1 · 王翼短易位 (0-0)",
+        "instruction": "白方王在 e1，车在 h1，通路已清空。请将王向右拖动两格至 g1，触发王翼短易位！",
+        "hint": "将 e1 的王移动到 g1 格。",
+        "fen": "r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": ["e1g1", "O-O"],
+        "successMessage": "成功！王到达 g1，车自动飞跃到 f1，王翼阵地瞬间固若金汤！"
+      },
+      {
+        "id": "castling_2",
+        "title": "关卡 2 · 后翼长易位 (0-0-0)",
+        "instruction": "白方王在 e1，车在 a1，后翼道路通畅。请将王向左拖动两格至 c1，触发后翼长易位！",
+        "hint": "将 e1 的王移动到 c1 格。",
+        "fen": "r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": ["e1c1", "O-O-O"],
+        "successMessage": "漂亮！王到达 c1，车飞到 d1，后翼长易位常伴随凶猛的异向易位攻杀！"
+      },
+      {
+        "id": "castling_3",
+        "title": "关卡 3 · 禁例破解：被将军不可易位",
+        "instruction": "黑车在 e3 正在对 e1 白王实施将军！由于正受将军，此时无法易位，必须先应将。请将白王移至安全格 d1 或 f1！",
+        "hint": "移动王至 d1 或 f1 摆脱黑车将军。",
+        "fen": "r3k2r/8/8/8/8/4r3/8/R3K2R w KQkq - 0 1",
+        "goalType": "escape_check",
+        "expectedMoves": ["e1d1", "e1f1", "Kd1", "Kf1"],
+        "successMessage": "掌握要领！谨记：受将军时绝不可用易位来逃脱将军！"
+      }
+    ]
+  },
+  {
+    "id": "promotion",
+    "title": "兵的升变",
+    "titleEn": "Pawn Promotion",
+    "badge": "绝地逆转神技",
+    "icon": "crown",
+    "shortDesc": "当小兵历经千辛万苦挺进到对方底线时，必须立刻蜕变为皇后、车、象、马任意强子。",
+    "conditionList": [
+      "白兵到达第 8 横线，或黑兵到达第 1 横线",
+      "不能升变为王，也不能继续保留为兵",
+      "升变选择没有数量限制（全盘可以同时存在多个后）"
+    ],
+    "rulesExplanation": [
+      "升变为后：最常见选择（97% 以上对局），获得全能最强战力。",
+      "低升变：偶尔在特殊战术中升变为马（为了立即将军或击双）或升变为车/象（为了避免误造成逼和）。"
+    ],
+    "levels": [
+      {
+        "id": "promotion_1",
+        "title": "关卡 1 · 挺进底线，一战封后",
+        "instruction": "白兵已勇闯至 e7！推进到 e8 底线，并在弹窗中选择升变为强大的皇后！",
+        "hint": "将 e7 的兵移动到 e8，点击弹窗中的皇后。",
+        "fen": "8/4P3/8/8/8/8/8/4K2k w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": ["e7e8q", "e8=Q"],
+        "successMessage": "震撼翻盘！一只小兵化身为威震全盘的皇后！"
+      },
+      {
+        "id": "promotion_2",
+        "title": "关卡 2 · 斜吃底线子力顺势升变",
+        "instruction": "白兵在 e7，黑车在 d8。白兵可以斜吃 d8 的黑车并顺势升变为后！",
+        "hint": "走 e7 到 d8 吃掉黑车并升变为皇后。",
+        "fen": "3r4/4P3/8/8/8/8/8/4K2k w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": ["e7d8q", "exd8=Q", "e7d8r", "e7d8b", "e7d8n"],
+        "successMessage": "一石二鸟！吃掉敌方大子同时完成升变！"
+      }
+    ]
+  },
+  {
+    "id": "en_passant",
+    "title": "吃过路兵",
+    "titleEn": "En Passant",
+    "badge": "稍纵即逝的截击",
+    "icon": "zap",
+    "shortDesc": "当对方兵从初始格连冲两格越过你兵的控制斜格时，你可在紧随的下一步将其斜向截击吃掉。",
+    "conditionList": [
+      "敌方兵必须是从第 2/7 横线【第一步直接冲两格】",
+      "己方兵必须正好位于第 5 横线（白方）或第 4 横线（黑方）与敌兵相邻",
+      "【必须在对方走完两格的立即下一步执行】，一旦走其他棋，吃过路兵权利永久失效"
+    ],
+    "rulesExplanation": [
+      "历史起源：15 世纪引入兵首步可冲两格规则以加快开局，为防止兵利用该规则轻易越过防线，特设吃过路兵平衡。",
+      "走法动作：将己方兵斜向走到敌兵刚刚跨过的中途格（如 c6），然后将旁边停留的敌兵（c5）从棋盘拿掉。"
+    ],
+    "levels": [
+      {
+        "id": "en_passant_1",
+        "title": "关卡 1 · 经典的过路兵截击",
+        "instruction": "黑方黑兵刚从 c7 连冲两步至 c5，跨过了白兵 d5 的攻击格 c6！请白兵走 d5 到 c6，将 c5 黑兵当场斩落！",
+        "hint": "将 d5 白兵斜向移动到 c6 格。",
+        "fen": "rnbqkbnr/pp1p1ppp/8/2pPp3/8/8/PPP1PPPP/RNBQKBNR w KQkq c6 0 3",
+        "goalType": "make_move",
+        "expectedMoves": ["d5c6", "dxc6"],
+        "successMessage": "太棒了！这就是吃过路兵！记住：仅在对手冲两格的下一瞬间生效！"
+      }
+    ]
+  },
+  {
+    "id": "check_and_mate",
+    "title": "将军、应将与将死",
+    "titleEn": "Check & Checkmate",
+    "badge": "胜负终局法则",
+    "icon": "alert-circle",
+    "shortDesc": "王受到攻击称为将军。化解将军有且仅有三种方式：吃子、垫子、逃王。无法应将即为将死。",
+    "conditionList": [
+      "将军：敌方棋子正在威胁攻击你的王",
+      "应将：轮到走棋必须立即解除被将军状态，不能不管",
+      "将死：受到将军且无任何合法应将手段，游戏结束判负"
+    ],
+    "rulesExplanation": [
+      "三种应将技巧：",
+      "1. 吃子：消灭攻击王的敌方棋子",
+      "2. 垫子：在攻击子和王之间放置己方棋子阻隔视线（对马的将军无法垫子）",
+      "3. 逃王：将王移动到不受攻击的安全方格"
+    ],
+    "levels": [
+      {
+        "id": "check_1",
+        "title": "关卡 1 · 应将第一式：吃子",
+        "instruction": "黑后在 d4 正在将军白王！白车在 d1，请直接用白车吃掉行凶的黑后！",
+        "hint": "走 d1 到 d4 吃掉黑后。",
+        "fen": "4k3/8/8/8/3q4/8/8/3R1K2 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": ["d1d4", "Rxd4"],
+        "successMessage": "直接消灭攻击源！这是最干脆利落的应将方式！"
+      },
+      {
+        "id": "check_2",
+        "title": "关卡 2 · 应将第二式：垫子",
+        "instruction": "黑车在 e8 直线将军！白象在 d1，请移动白象到 e2 挡在中间阻断攻击线！",
+        "hint": "走 d1 到 e2 垫子应将。",
+        "fen": "4r3/8/8/8/8/8/8/3B1K1k w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": ["d1e2", "Be2"],
+        "successMessage": "铜墙铁壁！用棋子阻断直线攻击成功保全王！"
+      },
+      {
+        "id": "check_3",
+        "title": "关卡 3 · 应将第三式：逃王",
+        "instruction": "黑车在 d4 将军，且身边无子可吃可垫。请将王移至安全的 f1 或 f2 格！",
+        "hint": "走 e1 到 f1 或 f2。",
+        "fen": "8/8/8/8/3r4/8/8/4K2k w - - 0 1",
+        "goalType": "escape_check",
+        "expectedMoves": ["e1f1", "e1f2", "Kf1", "Kf2"],
+        "successMessage": "走为上计！安全逃脱敌方火力覆盖！"
+      },
+      {
+        "id": "check_4",
+        "title": "关卡 4 · 锁定胜局：一步将死",
+        "instruction": "黑王被困在 h7，白王在 f6 封锁逃路。将 a7 白车直插 a8 底线，完成一步将死！",
+        "hint": "走 a7 到 a8。",
+        "fen": "8/R6k/5K2/8/8/8/8/8 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": ["a7a8", "Ra8#", "Ra8"],
+        "successMessage": "将死！黑方受到将军且无路可逃、无子可吃可垫，游戏获胜！"
+      }
+    ]
+  },
+  {
+    "id": "stalemate_and_draw",
+    "title": "逼和与和棋系统",
+    "titleEn": "Stalemate & Draw",
+    "badge": "和棋与逼和法则",
+    "icon": "scale",
+    "shortDesc": "未被将军但无任何合法走法时判为【逼和（和棋）】。是劣势防守求和、优势进攻需格外警惕的重要机制。",
+    "conditionList": [
+      "逼和：轮到走棋一方【当前没有被将军】，但全盘【没有任何合法步可走】",
+      "判定结果：国际象棋一律判为【和棋（各得 0.5 分）】",
+      "其他和棋情况：三次重复局面、50 步无吃子推兵规则、双方均无足够子力将死（如单王对单王）"
+    ],
+    "rulesExplanation": [
+      "防守方的神技：当处于巨大劣势时，利用逼和陷阱可以化败为和！",
+      "进攻方的禁忌：在巨大优势压迫时，务必警惕不能把对方王逼进无路可走且未受将的逼和陷阱中！"
+    ],
+    "levels": [
+      {
+        "id": "stalemate_1",
+        "title": "关卡 1 · 观察逼和经典局面",
+        "instruction": "黑王在 a8，白后在 c7，白王在 a6。观察此时：黑王并未被将军，但 a7, b8, b7 全被封死无步可走，此局面即为逼和（和棋）！请点击棋盘任意处继续体会。",
+        "hint": "观察棋盘局势，黑方未受将军但走不出任何合法棋步，判定和棋！",
+        "fen": "k7/2Q5/K7/8/8/8/8/8 b - - 0 1",
+        "goalType": "custom",
+        "expectedMoves": [],
+        "successMessage": "理解深刻！轮到走棋一方未受将军但全盘无合法走法，判为和棋！谨记逼和规则！"
+      },
+      {
+        "id": "stalemate_2",
+        "title": "关卡 2 · 避免逼和：走出正确将死",
+        "instruction": "白后在 c6，黑王在 a8。如果走 Qb6 将导致逼和（让黑方逃过一劫）；请走出将死着法 Qb7# 或 Qa8#！",
+        "hint": "走 c6 到 b7（Qb7#）直接将死黑王！",
+        "fen": "k7/8/K1Q5/8/8/8/8/8 w - - 0 1",
+        "goalType": "make_move",
+        "expectedMoves": ["c6b7", "Qb7#", "Qb7", "c6a8", "Qa8#", "Qa8"],
+        "successMessage": "精准斩获胜利！在胜局面前保持清醒，绝不给对手逼和喘息的机会！"
+      }
+    ]
+  }
+]

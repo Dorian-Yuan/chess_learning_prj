@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #F9F8F6; }
+      .shield-bg { fill: #F5F2EB; }
+      .navy-fill { fill: #14213D; }
+      .gold-fill { fill: #C29B38; }
+    </style>
+  </defs>
+  <rect width="512" height="512" class="bg" rx="96" />
+  <!-- Outer Border -->
+  <rect x="20" y="20" width="472" height="472" rx="76" fill="none" stroke="#14213D" stroke-width="20" />
+  <rect x="36" y="36" width="440" height="440" rx="60" fill="none" stroke="#C29B38" stroke-width="10" />
+
+  <!-- Shield -->
+  <path d="M 110 80 Q 256 55 402 80 C 402 245 375 355 256 440 C 137 355 110 245 110 80 Z" 
+        class="shield-bg" stroke="#14213D" stroke-width="16" />
+  <path d="M 128 98 Q 256 75 384 98 C 384 235 360 335 256 415 C 152 335 128 235 128 98 Z" 
+        fill="none" stroke="#C29B38" stroke-width="8" />
+
+  <!-- Crown -->
+  <g transform="translate(256, 85)">
+    <path d="M -50 20 L 50 20 L 44 32 L -44 32 Z" class="gold-fill" stroke="#14213D" stroke-width="6" />
+    <path d="M -50 20 L -60 -10 L -30 6 L 0 -26 L 30 6 L 60 -10 L 50 20 Z" class="gold-fill" stroke="#14213D" stroke-width="8" stroke-linejoin="round" />
+    <circle cx="0" cy="-30" r="8" class="navy-fill" stroke="#C29B38" stroke-width="4" />
+    <circle cx="-62" cy="-14" r="6" class="navy-fill" stroke="#C29B38" stroke-width="3" />
+    <circle cx="62" cy="-14" r="6" class="navy-fill" stroke="#C29B38" stroke-width="3" />
+  </g>
+
+  <!-- Staunton Knight Center -->
+  <g transform="translate(256, 240)">
+    <path d="M -12 -115 
+             L -8 -90 
+             C -20 -86 -34 -75 -48 -60 
+             L -85 -36 
+             C -96 -30 -100 -20 -92 -12 
+             C -86 -6 -72 -8 -64 -15 
+             C -52 -8 -42 2 -38 16 
+             C -45 34 -60 50 -72 65 
+             L -78 75 
+             L 88 75 
+             L 82 65 
+             C 76 35 74 5 62 -25 
+             C 52 -55 35 -84 2 -100 
+             L 2 -112 
+             L -12 -115 Z" 
+          class="navy-fill" stroke="#14213D" stroke-width="12" stroke-linejoin="round" />
+    <!-- Knight Gold Accents -->
+    <path d="M 0 -95 C 18 -82 34 -62 42 -38 L 28 -44 C 22 -60 10 -76 -2 -86 Z" class="gold-fill" />
+    <path d="M 40 -34 C 50 -12 55 10 58 34 L 44 26 C 42 6 36 -12 28 -28 Z" class="gold-fill" />
+    <!-- Ear & Eye -->
+    <path d="M -12 -112 L -6 -92 L -18 -94 Z" class="gold-fill" />
+    <circle cx="-35" cy="-56" r="7" class="gold-fill" />
+    <circle cx="-35" cy="-56" r="3" fill="#FAF8F5" />
+    <!-- Muzzle / Jaw Line -->
+    <path d="M -48 -58 L -80 -36 C -88 -30 -92 -22 -86 -16" fill="none" stroke="#C29B38" stroke-width="5" stroke-linecap="round" />
+    <path d="M -64 -15 C -52 -8 -42 2 -38 16" fill="none" stroke="#C29B38" stroke-width="5" stroke-linecap="round" />
+    <path d="M -38 16 C -48 34 -62 50 -72 65" fill="none" stroke="#C29B38" stroke-width="5" stroke-linecap="round" />
+    <!-- Pedestal Base -->
+    <rect x="-90" y="74" width="180" height="16" rx="4" class="gold-fill" stroke="#14213D" stroke-width="5" />
+    <rect x="-78" y="88" width="156" height="12" rx="3" class="navy-fill" stroke="#14213D" stroke-width="3" />
+  </g>
+
+  <!-- Open Academic Book -->
+  <g transform="translate(256, 375)">
+    <path d="M 0 35 Q -75 18 -135 28 L -135 42 Q -75 32 0 50 Q 75 32 135 42 L 135 28 Q 75 18 0 35 Z" 
+          class="gold-fill" stroke="#14213D" stroke-width="5" />
+    <path d="M 0 25 Q -65 2 -130 12 L -130 -18 Q -65 -28 0 -10 Z" 
+          fill="#FAF8F5" stroke="#14213D" stroke-width="8" />
+    <path d="M 0 25 Q 65 2 130 12 L 130 -18 Q 65 -28 0 -10 Z" 
+          fill="#FAF8F5" stroke="#14213D" stroke-width="8" />
+    <path d="M 0 -15 L 0 52" stroke="#C29B38" stroke-width="6" stroke-linecap="round" />
+    <!-- Bookmark -->
+    <path d="M 0 52 L -10 70 L 0 64 L 10 70 Z" class="gold-fill" stroke="#14213D" stroke-width="3" />
+  </g>
+</svg>

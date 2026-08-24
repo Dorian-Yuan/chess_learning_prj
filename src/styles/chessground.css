@@ -1,0 +1,188 @@
+/* Chessground Board & Pieces Styling */
+@import '@lichess-org/chessground/assets/chessground.base.css';
+@import '@lichess-org/chessground/assets/chessground.brown.css';
+@import '@lichess-org/chessground/assets/chessground.cburnett.css';
+
+/* Board container wrapper - maintains strict 1:1 aspect ratio */
+.cg-board-square {
+  width: 520px;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+}
+
+.cg-board-square .cg-wrap,
+.cg-wrap {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  user-select: none;
+  overflow: hidden;
+}
+
+cg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+cg-board {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--board-light-sq) !important;
+  background-image: conic-gradient(
+    var(--board-dark-sq) 90deg,
+    transparent 90deg 180deg,
+    var(--board-dark-sq) 180deg 270deg,
+    transparent 270deg
+  ) !important;
+  background-size: 25% 25% !important;
+  border-radius: var(--radius-md);
+  user-select: none;
+  display: block;
+}
+
+cg-board square.last-move {
+  background-color: var(--board-last-move) !important;
+}
+
+cg-board square.selected {
+  background-color: var(--board-last-move) !important;
+}
+
+cg-board square.move-dest {
+  background: radial-gradient(var(--board-highlight) 22%, transparent 0) !important;
+}
+
+cg-board square.move-dest:hover,
+cg-board square.move-dest.hover {
+  background: rgba(20, 33, 61, 0.25) !important;
+}
+
+/* Coordinates styling - positioned inside respective squares */
+.cg-wrap coords {
+  position: absolute;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  user-select: none;
+  z-index: 1;
+}
+
+/* Ranks (1-8) along right edge (default) or left edge (when .left) */
+.cg-wrap coords.ranks {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: auto;
+  width: 12.5%;
+  height: 100%;
+  display: flex;
+  flex-flow: column-reverse;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cg-wrap coords.ranks.black {
+  flex-flow: column;
+}
+
+.cg-wrap coords.ranks.left {
+  left: 0;
+  right: auto;
+}
+
+.cg-wrap coords.ranks coord {
+  flex: 1 1 0;
+  height: 12.5%;
+  width: 100%;
+  transform: none; /* Override chessground base.css translateY(39%) */
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-top: 3px;
+  padding-right: 4px;
+  box-sizing: border-box;
+}
+
+.cg-wrap coords.ranks.left coord {
+  justify-content: flex-start;
+  padding-right: 0;
+  padding-left: 4px;
+}
+
+/* Files (a-h) along bottom edge */
+.cg-wrap coords.files {
+  top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 12.5%;
+  display: flex;
+  flex-flow: row;
+  text-transform: lowercase;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cg-wrap coords.files.black {
+  flex-flow: row-reverse;
+}
+
+.cg-wrap coords.files coord {
+  flex: 1 1 0;
+  width: 12.5%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-bottom: 3px;
+  padding-right: 4px;
+  box-sizing: border-box;
+}
+
+/* High contrast styling on light/dark squares across themes */
+.cg-wrap coords coord.coord-light,
+.cg-wrap.orientation-white coords.ranks :nth-child(odd),
+.cg-wrap.orientation-white coords.files :nth-child(even),
+.cg-wrap.orientation-black coords.ranks :nth-child(even),
+.cg-wrap.orientation-black coords.files :nth-child(odd) {
+  color: var(--board-dark-sq);
+  opacity: 0.9;
+}
+
+.cg-wrap coords coord.coord-dark,
+.cg-wrap.orientation-white coords.ranks :nth-child(even),
+.cg-wrap.orientation-white coords.files :nth-child(odd),
+.cg-wrap.orientation-black coords.ranks :nth-child(odd),
+.cg-wrap.orientation-black coords.files :nth-child(even) {
+  color: var(--board-light-sq);
+  opacity: 0.95;
+}
+
+/* Custom Highlight classes */
+.highlight-target-sq {
+  background: radial-gradient(circle, rgba(194, 155, 56, 0.7) 30%, transparent 70%);
+}
+
+.highlight-danger-sq {
+  background: radial-gradient(circle, rgba(158, 42, 43, 0.7) 30%, transparent 70%);
+}

@@ -1,0 +1,1673 @@
+{
+  "principles": [
+    {
+      "id": "center_control",
+      "title": "原则一 · 占领并控制中心",
+      "subtitle": "争夺 e4, d4, e5, d5 核心四个格子",
+      "icon": "target",
+      "summary": "开局首要任务是争取对棋盘中央（e4, d4, e5, d5）的控制权。控制中心方格能够让己方棋子获得最大的辐射范围和快速转移机动性。",
+      "details": [
+        "中心格子是棋盘的制高点，位于中心的马可控制8格，而在边角的马只能控制2~4格。",
+        "用中央兵（e兵、d兵）直接进占中心，或用侧翼子力（如象占大斜线）间接控制中心（超现代主义思想）。",
+        "绝不在开局阶段无目的地走动边线边兵（如 a3, h3, a6, h6），这会白白浪费宝贵的出子先手。"
+      ],
+      "tips": "『谁控制了中心，谁就控制了整个棋盘。』"
+    },
+    {
+      "id": "minor_piece_development",
+      "title": "原则二 · 迅速出动轻子（马与象）",
+      "subtitle": "先马后象，兵种协同，避免单子反复走动",
+      "icon": "zap",
+      "summary": "开局阶段要快速将马和象调动到具有积极影响力的前哨阵地，协同争夺中心并为王的安全易位扫清道路。",
+      "details": [
+        "一般遵循『先出马、后出象』的顺序，因为马的最佳位置（如 Nf3, Nc3）通常明确，而象的位置更需视局势而定。",
+        "开局切忌同一棋子连续走动多次，除非有直接的得子战术机会或迫不得已的防守。",
+        "切忌过早出动皇后！过早出后极易被对方轻子攻击追逐，导致己方频频逃后而让对手顺势快速出子。"
+      ],
+      "tips": "开局的每一先手都是无价之宝，出子速度决定了中局主动权的归属。"
+    },
+    {
+      "id": "king_safety_castling",
+      "title": "原则三 · 确保王的安全（尽早易位）",
+      "subtitle": "移王入堡，连通双车，准备进入中局战斗",
+      "icon": "shield",
+      "summary": "在中心战火蔓延、兵线开启之前，必须尽快通过【王车易位】将王转移至安全的翼侧兵阵深处，并将角落里的车调入中央开放线。",
+      "details": [
+        "未易位的王停留在 e1/e8 中心极易在中央兵线兑开后成为对方重炮轰击的活靶子。",
+        "王翼短易位（0-0）耗步少、成型快，王位极稳固；后翼长易位（0-0-0）更具进攻性，易引发异向易位对攻大混战。",
+        "易位后应尽量保持王前兵阵（如 f2-g2-h2）完整，不可轻易前冲破坏护卫兵链。"
+      ],
+      "tips": "王安全是发起一切进攻的前提。在王尚未安全前发起盲目冲锋通常招致灾难。"
+    }
+  ],
+  "openings": [
+    {
+      "id": "italian_game",
+      "name": "Italian Game",
+      "nameZh": "意大利开局",
+      "eco": "C50",
+      "type": "open",
+      "typeNameZh": "开放开局",
+      "badge": "古典优雅 · 攻防兼备",
+      "shortDesc": "国际象棋历史最悠久的经典开局之一，直指黑方 f7 弱点，节奏明快，极易上手。",
+      "strategy": {
+        "whiteIdea": "利用 Bc4 瞄准黑方防御最薄弱的 f7 格，伺机通过 c3-d4 建立强力中央双兵阵或通过 Ng5 发起直接攻杀。",
+        "blackIdea": "黑方可通过 Bc5（吉乌科钢琴）维持中心均势，或通过 Nf6（双马防御）直接反击白方 e4 兵引发尖锐战术对攻。",
+        "keyThemes": [
+          "f7要害争夺",
+          "c3-d4冲中兵",
+          "双象对峙",
+          "快速王翼易位"
+        ]
+      },
+      "mainLine": [
+        {
+          "ply": 1,
+          "san": "e4",
+          "uci": "e2e4",
+          "comment": "挺进国王中心兵，控制 d5 和 f5 要点，为后和白格象打开通路。",
+          "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+        },
+        {
+          "ply": 2,
+          "san": "e5",
+          "uci": "e7e5",
+          "comment": "黑方对称应对，占领中心并控制 d4/f4 格，封锁白兵进一步扩张。",
+          "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+        },
+        {
+          "ply": 3,
+          "san": "Nf3",
+          "uci": "g1f3",
+          "comment": "出动王翼马，既施压攻击黑方 e5 兵，又协助争夺 d4 中心并为易位准备。",
+          "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"
+        },
+        {
+          "ply": 4,
+          "san": "Nc6",
+          "uci": "b8c6",
+          "comment": "黑马跳出守卫 e5 兵，同时控制 d4/e5 格，出子兼顾防守。",
+          "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"
+        },
+        {
+          "ply": 5,
+          "san": "Bc4",
+          "uci": "f1c4",
+          "comment": "意大利开局标志性一步！象占领最佳进攻斜线，直接瞄准黑王仅由王一人看守的 f7 致命要害。",
+          "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3"
+        },
+        {
+          "ply": 6,
+          "san": "Bc5",
+          "uci": "f8c5",
+          "comment": "黑方进入吉乌科钢琴变例，出象争夺 d4 中心并抑制白方 d2-d4 冲兵。",
+          "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4"
+        },
+        {
+          "ply": 7,
+          "san": "c3",
+          "uci": "c2c3",
+          "comment": "白方准备走 d4 建立宏大的中央兵群，同时为 Qb3 攻 f7 留出通道。",
+          "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R b KQkq - 0 4"
+        },
+        {
+          "ply": 8,
+          "san": "Nf6",
+          "uci": "g8f6",
+          "comment": "黑马出动攻击白方 e4 兵，遵循轻子快出原则并准备王翼易位。",
+          "fen": "r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R w KQkq - 1 5"
+        },
+        {
+          "ply": 9,
+          "san": "d4",
+          "uci": "d2d4",
+          "comment": "白方如期冲出 d4 冲击中心并攻击黑象，战火全面燃起！",
+          "fen": "r1bqk2r/pppp1ppp/2n2n2/2b1p3/2BPP3/2P2N2/PP3PPP/RNBQK2R b KQkq - 0 5"
+        },
+        {
+          "ply": 10,
+          "san": "exd4",
+          "uci": "e5d4",
+          "comment": "黑方被迫兑兵以化解中央压力。",
+          "fen": "r1bqk2r/pppp1ppp/2n2n2/2b5/2BpP3/2P2N2/PP3PPP/RNBQK2R w KQkq - 0 6"
+        },
+        {
+          "ply": 11,
+          "san": "cxd4",
+          "uci": "c3d4",
+          "comment": "白方成功建立全能中央双兵中心，局面积极主动！",
+          "fen": "r1bqk2r/pppp1ppp/2n2n2/2b5/2BPP3/5N2/PP3PPP/RNBQK2R b KQkq - 0 6"
+        },
+        {
+          "ply": 12,
+          "san": "Bb4+",
+          "uci": "c5b4",
+          "comment": "黑象将军垫步，争取防守反击喘息时间。",
+          "fen": "r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/5N2/PP3PPP/RNBQK2R w KQkq - 1 7"
+        },
+        {
+          "ply": 13,
+          "san": "Bd2",
+          "uci": "c1d2",
+          "comment": "白象回垫化解将军，准备通过易位完成开局阶段布阵。",
+          "fen": "r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/5N2/PP1B1PPP/RN1QK2R b KQkq - 2 7"
+        }
+      ],
+      "variations": [
+        {
+          "id": "giuoco_piano",
+          "name": "Giuoco Piano",
+          "nameZh": "吉乌科钢琴",
+          "eco": "C54",
+          "description": "意大利开局最古老稳健的主流变例，双方在中央展开缜密的阵地攻防战。",
+          "moves": [
+            {
+              "ply": 1,
+              "san": "e4",
+              "uci": "e2e4",
+              "comment": "控制中心",
+              "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+            },
+            {
+              "ply": 2,
+              "san": "e5",
+              "uci": "e7e5",
+              "comment": "争夺中心",
+              "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+            },
+            {
+              "ply": 3,
+              "san": "Nf3",
+              "uci": "g1f3",
+              "comment": "施压 e5",
+              "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"
+            },
+            {
+              "ply": 4,
+              "san": "Nc6",
+              "uci": "b8c6",
+              "comment": "守卫 e5",
+              "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"
+            },
+            {
+              "ply": 5,
+              "san": "Bc4",
+              "uci": "f1c4",
+              "comment": "瞄准 f7",
+              "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3"
+            },
+            {
+              "ply": 6,
+              "san": "Bc5",
+              "uci": "f8c5",
+              "comment": "出象对峙",
+              "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4"
+            },
+            {
+              "ply": 7,
+              "san": "c3",
+              "uci": "c2c3",
+              "comment": "准备冲 d4",
+              "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R b KQkq - 0 4"
+            },
+            {
+              "ply": 8,
+              "san": "Nf6",
+              "uci": "g8f6",
+              "comment": "攻击 e4",
+              "fen": "r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R w KQkq - 1 5"
+            },
+            {
+              "ply": 9,
+              "san": "d3",
+              "uci": "d2d3",
+              "comment": "安静意大利变例，稳固 e4 兵，准备慢速调子。",
+              "fen": "r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/2PP1N2/PP3PPP/RNBQK2R b KQkq - 0 5"
+            }
+          ]
+        },
+        {
+          "id": "two_knights",
+          "name": "Two Knights Defense",
+          "nameZh": "双马防御",
+          "eco": "C57",
+          "description": "黑方在第 3 步不走 Bc5 而是坚决走 Nf6 反击 e4，常引发极度火爆尖锐的攻杀对决。",
+          "moves": [
+            {
+              "ply": 1,
+              "san": "e4",
+              "uci": "e2e4",
+              "comment": "控制中心",
+              "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+            },
+            {
+              "ply": 2,
+              "san": "e5",
+              "uci": "e7e5",
+              "comment": "争夺中心",
+              "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+            },
+            {
+              "ply": 3,
+              "san": "Nf3",
+              "uci": "g1f3",
+              "comment": "施压 e5",
+              "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"
+            },
+            {
+              "ply": 4,
+              "san": "Nc6",
+              "uci": "b8c6",
+              "comment": "守卫 e5",
+              "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"
+            },
+            {
+              "ply": 5,
+              "san": "Bc4",
+              "uci": "f1c4",
+              "comment": "瞄准 f7",
+              "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3"
+            },
+            {
+              "ply": 6,
+              "san": "Nf6",
+              "uci": "g8f6",
+              "comment": "双马防御标志！反击白方 e4 兵！",
+              "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4"
+            },
+            {
+              "ply": 7,
+              "san": "Ng5",
+              "uci": "f3g5",
+              "comment": "白马冲入敌阵与 c4 象双击 f7 致命弱点（煎肝攻击前奏）！",
+              "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p1N1/2B1P3/8/PPPP1PPP/RNBQK2R b KQkq - 5 4"
+            },
+            {
+              "ply": 8,
+              "san": "d5",
+              "uci": "d7d5",
+              "comment": "黑方唯一正着：弃兵阻断白象攻击线！",
+              "fen": "r1bqkb1r/ppp2ppp/2n2n2/3pp1N1/2B1P3/8/PPPP1PPP/RNBQK2R w KQkq - 0 5"
+            },
+            {
+              "ply": 9,
+              "san": "exd5",
+              "uci": "e4d5",
+              "comment": "白兵吃子",
+              "fen": "r1bqkb1r/ppp2ppp/2n2n2/3Pp1N1/2B5/8/PPPP1PPP/RNBQK2R b KQkq - 0 5"
+            },
+            {
+              "ply": 10,
+              "san": "Na5",
+              "uci": "c6a5",
+              "comment": "黑马驱逐白象，展开反击！",
+              "fen": "r1bqkb1r/ppp2ppp/5n2/n2Pp1N1/2B5/8/PPPP1PPP/RNBQK2R w KQkq - 1 6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ruy_lopez",
+      "name": "Ruy Lopez",
+      "nameZh": "西班牙开局",
+      "eco": "C60",
+      "type": "open",
+      "typeNameZh": "开放开局",
+      "badge": "战略宏伟 · 顶峰博弈",
+      "shortDesc": "国际象棋大师与世界冠军赛出场率最高的顶级开局，战略结构深邃，富含丰富的机动与战略调整。",
+      "strategy": {
+        "whiteIdea": "通过 Bb5 施压黑方 e5 兵的守卫者 Nc6，间接威胁黑方中央，并在后翼与中央展开长线战略渗透。",
+        "blackIdea": "通过 a6（摩菲防御）测试白象意图，并在后翼展开 b5 扩张，谋求中心反击与双象活跃度。",
+        "keyThemes": [
+          "消除e5防守马",
+          "王翼象回撤转运 (Bb5-a4-b3-c2)",
+          "c3-d4大中心构筑",
+          "开放线多兵种协同"
+        ]
+      },
+      "mainLine": [
+        {
+          "ply": 1,
+          "san": "e4",
+          "uci": "e2e4",
+          "comment": "争夺中心",
+          "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+        },
+        {
+          "ply": 2,
+          "san": "e5",
+          "uci": "e7e5",
+          "comment": "争夺中心",
+          "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+        },
+        {
+          "ply": 3,
+          "san": "Nf3",
+          "uci": "g1f3",
+          "comment": "出马施压 e5",
+          "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"
+        },
+        {
+          "ply": 4,
+          "san": "Nc6",
+          "uci": "b8c6",
+          "comment": "出马守 e5",
+          "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"
+        },
+        {
+          "ply": 5,
+          "san": "Bb5",
+          "uci": "f1b5",
+          "comment": "西班牙开局标志！象压制 c6 马，间接威胁 e5 兵的根基！",
+          "fen": "r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3"
+        },
+        {
+          "ply": 6,
+          "san": "a6",
+          "uci": "a7a6",
+          "comment": "摩菲防御：立刻发问白象去向。",
+          "fen": "r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4"
+        },
+        {
+          "ply": 7,
+          "san": "Ba4",
+          "uci": "b5a4",
+          "comment": "白象保留压力，回退保持对 c6 与后续对角的辐射。",
+          "fen": "r1bqkbnr/1ppp1ppp/p1n5/4p3/B3P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 1 4"
+        },
+        {
+          "ply": 8,
+          "san": "Nf6",
+          "uci": "g8f6",
+          "comment": "黑马出动施压 e4 兵，准备王翼易位。",
+          "fen": "r1bqkb1r/1ppp1ppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 2 5"
+        },
+        {
+          "ply": 9,
+          "san": "O-O",
+          "uci": "e1g1",
+          "comment": "白方先易位固王！如果黑走 Nxe4，白方有 Re1 顺势夺回并施压开放线。",
+          "fen": "r1bqkb1r/1ppp1ppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 3 5"
+        },
+        {
+          "ply": 10,
+          "san": "Be7",
+          "uci": "f8e7",
+          "comment": "黑象稳健出动，为易位清空通道。",
+          "fen": "r1bqk2r/1pppbppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQ1RK1 w kq - 4 6"
+        },
+        {
+          "ply": 11,
+          "san": "Re1",
+          "uci": "f1e1",
+          "comment": "白车进驻 e1 保护 e4 兵，此时真正威胁 Bxc6 后吃掉 e5 兵。",
+          "fen": "r1bqk2r/1pppbppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 5 6"
+        },
+        {
+          "ply": 12,
+          "san": "b5",
+          "uci": "b7b5",
+          "comment": "黑方挺兵解除 c6 牵制危机。",
+          "fen": "r1bqk2r/2ppbppp/p1n2n2/1p2p3/B3P3/5N2/PPPP1PPP/RNBQR1K1 w kq - 0 7"
+        },
+        {
+          "ply": 13,
+          "san": "Bb3",
+          "uci": "a4b3",
+          "comment": "白象退回 b3 黄金大对角线，继续俯瞰 a2-g8 航道。",
+          "fen": "r1bqk2r/2ppbppp/p1n2n2/1p2p3/4P3/1B3N2/PPPP1PPP/RNBQR1K1 b kq - 1 7"
+        },
+        {
+          "ply": 14,
+          "san": "d6",
+          "uci": "d7d6",
+          "comment": "黑方巩固 e5 核心，双方进入深厚的主线中局较量！",
+          "fen": "r1bqk2r/2p1bppp/p1np1n2/1p2p3/4P3/1B3N2/PPPP1PPP/RNBQR1K1 w kq - 0 8"
+        }
+      ],
+      "variations": [
+        {
+          "id": "berlin_defense",
+          "name": "Berlin Defense",
+          "nameZh": "柏林防御",
+          "eco": "C65",
+          "description": "被克拉姆尼克用于击败卡斯帕罗夫的『柏林铁壁』，防守极其坚固顽强。",
+          "moves": [
+            {
+              "ply": 1,
+              "san": "e4",
+              "uci": "e2e4",
+              "comment": "控制中心",
+              "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+            },
+            {
+              "ply": 2,
+              "san": "e5",
+              "uci": "e7e5",
+              "comment": "争夺中心",
+              "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+            },
+            {
+              "ply": 3,
+              "san": "Nf3",
+              "uci": "g1f3",
+              "comment": "出马施压",
+              "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"
+            },
+            {
+              "ply": 4,
+              "san": "Nc6",
+              "uci": "b8c6",
+              "comment": "守卫 e5",
+              "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"
+            },
+            {
+              "ply": 5,
+              "san": "Bb5",
+              "uci": "f1b5",
+              "comment": "西班牙开局",
+              "fen": "r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3"
+            },
+            {
+              "ply": 6,
+              "san": "Nf6",
+              "uci": "g8f6",
+              "comment": "柏林防御标志！直接吃马反击 e4，不走 a6。",
+              "fen": "r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4"
+            },
+            {
+              "ply": 7,
+              "san": "O-O",
+              "uci": "e1g1",
+              "comment": "白方易位",
+              "fen": "r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 5 4"
+            },
+            {
+              "ply": 8,
+              "san": "Nxe4",
+              "uci": "f6e4",
+              "comment": "黑马大胆吃掉 e4 兵，进入著名的柏林残局谱系！",
+              "fen": "r1bqkb1r/pppp1ppp/2n5/1B2p3/4n3/5N2/PPPP1PPP/RNBQ1RK1 w kq - 0 5"
+            }
+          ]
+        },
+        {
+          "id": "exchange_variation",
+          "name": "Exchange Variation",
+          "nameZh": "兑子变例",
+          "eco": "C68",
+          "description": "白方在第 4 步直接用象兑掉黑马，制造黑方后翼叠兵并谋求王翼兵多残局胜势。",
+          "moves": [
+            {
+              "ply": 1,
+              "san": "e4",
+              "uci": "e2e4",
+              "comment": "控制中心",
+              "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+            },
+            {
+              "ply": 2,
+              "san": "e5",
+              "uci": "e7e5",
+              "comment": "争夺中心",
+              "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+            },
+            {
+              "ply": 3,
+              "san": "Nf3",
+              "uci": "g1f3",
+              "comment": "出马",
+              "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"
+            },
+            {
+              "ply": 4,
+              "san": "Nc6",
+              "uci": "b8c6",
+              "comment": "出马",
+              "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"
+            },
+            {
+              "ply": 5,
+              "san": "Bb5",
+              "uci": "f1b5",
+              "comment": "西班牙象",
+              "fen": "r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3"
+            },
+            {
+              "ply": 6,
+              "san": "a6",
+              "uci": "a7a6",
+              "comment": "黑走 a6",
+              "fen": "r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4"
+            },
+            {
+              "ply": 7,
+              "san": "Bxc6",
+              "uci": "b5c6",
+              "comment": "兑子变例！白象直接吃马，破坏黑方兵形！",
+              "fen": "r1bqkbnr/1ppp1ppp/p1B5/4p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 0 4"
+            },
+            {
+              "ply": 8,
+              "san": "dxc6",
+              "uci": "d7c6",
+              "comment": "黑方 d 兵回吃，虽然形成 c6-c7 叠兵，但迅速打开双象通路。",
+              "fen": "r1bqkbnr/1pp2ppp/p1p5/4p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scotch_game",
+      "name": "Scotch Game",
+      "nameZh": "苏格兰开局",
+      "eco": "C45",
+      "type": "open",
+      "typeNameZh": "开放开局",
+      "badge": "中心开花 · 刚猛迅捷",
+      "shortDesc": "白方在第 3 步直接冲 d4 强行炸开中央，避开复杂的西班牙开局理论，迅速转入开阔对攻。",
+      "strategy": {
+        "whiteIdea": "第 3 步以 d4 强行破开中心，以马占领 d4 枢纽，获取开阔子力机动空间与开放线攻势。",
+        "blackIdea": "通过 Bc5 或 Nf6 快速反击白方 d4 马，利用活跃的轻子争夺中心主动权。",
+        "keyThemes": [
+          "第3步d4突击",
+          "中央彻底开放",
+          "主动兑子与机动争夺",
+          "卡斯帕罗夫神兵利器"
+        ]
+      },
+      "mainLine": [
+        {
+          "ply": 1,
+          "san": "e4",
+          "uci": "e2e4",
+          "comment": "争夺中心",
+          "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+        },
+        {
+          "ply": 2,
+          "san": "e5",
+          "uci": "e7e5",
+          "comment": "争夺中心",
+          "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+        },
+        {
+          "ply": 3,
+          "san": "Nf3",
+          "uci": "g1f3",
+          "comment": "出马施压",
+          "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"
+        },
+        {
+          "ply": 4,
+          "san": "Nc6",
+          "uci": "b8c6",
+          "comment": "守卫 e5",
+          "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"
+        },
+        {
+          "ply": 5,
+          "san": "d4",
+          "uci": "d2d4",
+          "comment": "苏格兰开局标志！第 3 步直接冲 d4 强开中心通道！",
+          "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3"
+        },
+        {
+          "ply": 6,
+          "san": "exd4",
+          "uci": "e5d4",
+          "comment": "黑方最佳回应：吃掉 d4 兵。",
+          "fen": "r1bqkbnr/pppp1ppp/2n5/8/3pP3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 4"
+        },
+        {
+          "ply": 7,
+          "san": "Nxd4",
+          "uci": "f3d4",
+          "comment": "白马跃入中央 d4 黄金格控制全局。",
+          "fen": "r1bqkbnr/pppp1ppp/2n5/8/3NP3/8/PPP2PPP/RNBQKB1R b KQkq - 0 4"
+        },
+        {
+          "ply": 8,
+          "san": "Bc5",
+          "uci": "f8c5",
+          "comment": "黑象积极出动，瞄准并多重施压 d4 白马。",
+          "fen": "r1bqk1nr/pppp1ppp/2n5/2b5/3NP3/8/PPP2PPP/RNBQKB1R w KQkq - 1 5"
+        },
+        {
+          "ply": 9,
+          "san": "Be3",
+          "uci": "c1e3",
+          "comment": "白象出动加固 d4 防守，暗藏马跳开抽吃黑象的战术伏笔。",
+          "fen": "r1bqk1nr/pppp1ppp/2n5/2b5/3NP3/4B3/PPP2PPP/RN1QKB1R b KQkq - 2 5"
+        },
+        {
+          "ply": 10,
+          "san": "Qf6",
+          "uci": "d8f6",
+          "comment": "黑后出动强化对 d4 的围剿，局势充满紧张战术火药味！",
+          "fen": "r1b1k1nr/pppp1ppp/2n2q2/2b5/3NP3/4B3/PPP2PPP/RN1QKB1R w KQkq - 3 6"
+        },
+        {
+          "ply": 11,
+          "san": "c3",
+          "uci": "c2c3",
+          "comment": "白方巩固 d4 堡垒，双方轻子全部高度活跃！",
+          "fen": "r1b1k1nr/pppp1ppp/2n2q2/2b5/3NP3/2P1B3/PP3PPP/RN1QKB1R b KQkq - 0 6"
+        }
+      ],
+      "variations": [
+        {
+          "id": "mieses_variation",
+          "name": "Mieses Variation",
+          "nameZh": "米塞斯变例",
+          "eco": "C45",
+          "description": "黑方在第 4 步走 Nf6 进攻 e4 兵，引发白方推进 e5 驱赶马的尖锐变例。",
+          "moves": [
+            {
+              "ply": 1,
+              "san": "e4",
+              "uci": "e2e4",
+              "comment": "控制中心",
+              "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+            },
+            {
+              "ply": 2,
+              "san": "e5",
+              "uci": "e7e5",
+              "comment": "争夺中心",
+              "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+            },
+            {
+              "ply": 3,
+              "san": "Nf3",
+              "uci": "g1f3",
+              "comment": "出马",
+              "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"
+            },
+            {
+              "ply": 4,
+              "san": "Nc6",
+              "uci": "b8c6",
+              "comment": "守兵",
+              "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"
+            },
+            {
+              "ply": 5,
+              "san": "d4",
+              "uci": "d2d4",
+              "comment": "苏格兰开局",
+              "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3"
+            },
+            {
+              "ply": 6,
+              "san": "exd4",
+              "uci": "e5d4",
+              "comment": "吃兵",
+              "fen": "r1bqkbnr/pppp1ppp/2n5/8/3pP3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 4"
+            },
+            {
+              "ply": 7,
+              "san": "Nxd4",
+              "uci": "f3d4",
+              "comment": "吃回马",
+              "fen": "r1bqkbnr/pppp1ppp/2n5/8/3NP3/8/PPP2PPP/RNBQKB1R b KQkq - 0 4"
+            },
+            {
+              "ply": 8,
+              "san": "Nf6",
+              "uci": "g8f6",
+              "comment": "米塞斯变例！直接出马反击 e4！",
+              "fen": "r1bqkb1r/pppp1ppp/2n2n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq - 1 5"
+            },
+            {
+              "ply": 9,
+              "san": "Nxc6",
+              "uci": "d4c6",
+              "comment": "白马主动兑子",
+              "fen": "r1bqkb1r/pppp1ppp/2N2n2/8/4P3/8/PPP2PPP/RNBQKB1R b KQkq - 0 5"
+            },
+            {
+              "ply": 10,
+              "san": "bxc6",
+              "uci": "b7c6",
+              "comment": "黑兵回吃",
+              "fen": "r1bqkb1r/p1pp1ppp/2p2n2/8/4P3/8/PPP2PPP/RNBQKB1R w KQkq - 0 6"
+            },
+            {
+              "ply": 11,
+              "san": "e5",
+              "uci": "e4e5",
+              "comment": "白兵推进驱赶黑马！",
+              "fen": "r1bqkb1r/p1pp1ppp/2p2n2/4P3/8/8/PPP2PPP/RNBQKB1R b KQkq - 0 6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sicilian_defense",
+      "name": "Sicilian Defense",
+      "nameZh": "西西里防御",
+      "eco": "B20",
+      "type": "semi-open",
+      "typeNameZh": "半开放开局",
+      "badge": "胜率王者 · 不死神话",
+      "shortDesc": "国际象棋胜率最高、战斗性最强的不对称防御！以侧翼 c 兵换白方中心 d 兵，掌控半开放 c 竖线。",
+      "strategy": {
+        "whiteIdea": "在开放西西里中迅速占领中心并发起王翼狂风暴雨般的狂攻杀局（如英格兰攻击/劳泽攻击）。",
+        "blackIdea": "通过 c 兵兑掉白方 d 兵获取中央多兵优势（2个中心兵对1个），利用半开放 c 线在后翼发起强劲反击。",
+        "keyThemes": [
+          "不对称失衡对攻",
+          "半开放c线反击",
+          "d5格控制权",
+          "异向易位对攻狂潮"
+        ]
+      },
+      "mainLine": [
+        {
+          "ply": 1,
+          "san": "e4",
+          "uci": "e2e4",
+          "comment": "白方挺进国王兵",
+          "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+        },
+        {
+          "ply": 2,
+          "san": "c5",
+          "uci": "c7c5",
+          "comment": "西西里防御标志！以侧翼 c 兵反击 d4 控制格，打破对称局面！",
+          "fen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+        },
+        {
+          "ply": 3,
+          "san": "Nf3",
+          "uci": "g1f3",
+          "comment": "白马出动，准备冲出 d4 开启开放西西里。",
+          "fen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"
+        },
+        {
+          "ply": 4,
+          "san": "d6",
+          "uci": "d7d6",
+          "comment": "黑方巩固 c5 并控制 e5 格，为出子做铺垫。",
+          "fen": "rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 3"
+        },
+        {
+          "ply": 5,
+          "san": "d4",
+          "uci": "d2d4",
+          "comment": "白方如期冲 d4 开启战线！",
+          "fen": "rnbqkbnr/pp2pppp/3p4/2p5/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3"
+        },
+        {
+          "ply": 6,
+          "san": "cxd4",
+          "uci": "c5d4",
+          "comment": "黑方成功以侧翼兵消灭白方珍贵的中心 d 兵！",
+          "fen": "rnbqkbnr/pp2pppp/3p4/8/3pP3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 4"
+        },
+        {
+          "ply": 7,
+          "san": "Nxd4",
+          "uci": "f3d4",
+          "comment": "白马占领中心",
+          "fen": "rnbqkbnr/pp2pppp/3p4/8/3NP3/8/PPP2PPP/RNBQKB1R b KQkq - 0 4"
+        },
+        {
+          "ply": 8,
+          "san": "Nf6",
+          "uci": "g8f6",
+          "comment": "黑马出动攻击 e4 弱兵",
+          "fen": "rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq - 1 5"
+        },
+        {
+          "ply": 9,
+          "san": "Nc3",
+          "uci": "b1c3",
+          "comment": "白马出动防守 e4",
+          "fen": "rnbqkb1r/pp2pppp/3p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b KQkq - 2 5"
+        },
+        {
+          "ply": 10,
+          "san": "a6",
+          "uci": "a7a6",
+          "comment": "纳道尔夫变例神之一手！彻底封锁 b5 格（阻止 Nb5/Bb5+），准备展开 b5 后翼大扩张！",
+          "fen": "rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq - 0 6"
+        }
+      ],
+      "variations": [
+        {
+          "id": "najdorf_variation",
+          "name": "Najdorf Variation",
+          "nameZh": "纳道尔夫变例",
+          "eco": "B90",
+          "description": "费舍尔与卡斯帕罗夫的最爱，西西里防御皇冠上的明珠，极度深奥锐利。",
+          "moves": [
+            {
+              "ply": 1,
+              "san": "e4",
+              "uci": "e2e4",
+              "comment": "挺兵",
+              "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+            },
+            {
+              "ply": 2,
+              "san": "c5",
+              "uci": "c7c5",
+              "comment": "西西里",
+              "fen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+            },
+            {
+              "ply": 3,
+              "san": "Nf3",
+              "uci": "g1f3",
+              "comment": "出马",
+              "fen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"
+            },
+            {
+              "ply": 4,
+              "san": "d6",
+              "uci": "d7d6",
+              "comment": "控制中心",
+              "fen": "rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 3"
+            },
+            {
+              "ply": 5,
+              "san": "d4",
+              "uci": "d2d4",
+              "comment": "冲中心",
+              "fen": "rnbqkbnr/pp2pppp/3p4/2p5/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3"
+            },
+            {
+              "ply": 6,
+              "san": "cxd4",
+              "uci": "c5d4",
+              "comment": "吃兵",
+              "fen": "rnbqkbnr/pp2pppp/3p4/8/3pP3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 4"
+            },
+            {
+              "ply": 7,
+              "san": "Nxd4",
+              "uci": "f3d4",
+              "comment": "马吃回",
+              "fen": "rnbqkbnr/pp2pppp/3p4/8/3NP3/8/PPP2PPP/RNBQKB1R b KQkq - 0 4"
+            },
+            {
+              "ply": 8,
+              "san": "Nf6",
+              "uci": "g8f6",
+              "comment": "施压 e4",
+              "fen": "rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq - 1 5"
+            },
+            {
+              "ply": 9,
+              "san": "Nc3",
+              "uci": "b1c3",
+              "comment": "守卫 e4",
+              "fen": "rnbqkb1r/pp2pppp/3p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b KQkq - 2 5"
+            },
+            {
+              "ply": 10,
+              "san": "a6",
+              "uci": "a7a6",
+              "comment": "纳道尔夫变例",
+              "fen": "rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq - 0 6"
+            },
+            {
+              "ply": 11,
+              "san": "Be2",
+              "uci": "f1e2",
+              "comment": "古典慢调稳健应对",
+              "fen": "rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP1BPPP/R1BQK2R b KQkq - 1 6"
+            },
+            {
+              "ply": 12,
+              "san": "e5",
+              "uci": "e7e5",
+              "comment": "黑方反刺中央！占领空间！",
+              "fen": "rnbqkb1r/1p3ppp/p2p1n2/4p3/3NP3/2N5/PPP1BPPP/R1BQK2R w KQkq - 0 7"
+            }
+          ]
+        },
+        {
+          "id": "dragon_variation",
+          "name": "Dragon Variation",
+          "nameZh": "龙式变例",
+          "eco": "B70",
+          "description": "黑方后翼兵阵宛如巨龙蜿蜒，g7 龙象射程穿透全盘，双方往往在异向易位中抢先一步决生死！",
+          "moves": [
+            {
+              "ply": 1,
+              "san": "e4",
+              "uci": "e2e4",
+              "comment": "挺兵",
+              "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+            },
+            {
+              "ply": 2,
+              "san": "c5",
+              "uci": "c7c5",
+              "comment": "西西里",
+              "fen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+            },
+            {
+              "ply": 3,
+              "san": "Nf3",
+              "uci": "g1f3",
+              "comment": "出马",
+              "fen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"
+            },
+            {
+              "ply": 4,
+              "san": "d6",
+              "uci": "d7d6",
+              "comment": "稳固",
+              "fen": "rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 3"
+            },
+            {
+              "ply": 5,
+              "san": "d4",
+              "uci": "d2d4",
+              "comment": "开中心",
+              "fen": "rnbqkbnr/pp2pppp/3p4/2p5/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3"
+            },
+            {
+              "ply": 6,
+              "san": "cxd4",
+              "uci": "c5d4",
+              "comment": "吃兵",
+              "fen": "rnbqkbnr/pp2pppp/3p4/8/3pP3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 4"
+            },
+            {
+              "ply": 7,
+              "san": "Nxd4",
+              "uci": "f3d4",
+              "comment": "马吃回",
+              "fen": "rnbqkbnr/pp2pppp/3p4/8/3NP3/8/PPP2PPP/RNBQKB1R b KQkq - 0 4"
+            },
+            {
+              "ply": 8,
+              "san": "Nf6",
+              "uci": "g8f6",
+              "comment": "攻 e4",
+              "fen": "rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq - 1 5"
+            },
+            {
+              "ply": 9,
+              "san": "Nc3",
+              "uci": "b1c3",
+              "comment": "守 e4",
+              "fen": "rnbqkb1r/pp2pppp/3p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b KQkq - 2 5"
+            },
+            {
+              "ply": 10,
+              "san": "g6",
+              "uci": "g7g6",
+              "comment": "龙式变例标志！黑方准备侧翼出象（g7龙象）斜贯全盘！",
+              "fen": "rnbqkb1r/pp2pp1p/3p1np1/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq - 0 6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "french_defense",
+      "name": "French Defense",
+      "nameZh": "法兰西防御",
+      "eco": "C00",
+      "type": "semi-open",
+      "typeNameZh": "半开放开局",
+      "badge": "钢铁防线 · 反击利刃",
+      "shortDesc": "坚如磐石的防御堡垒！以 e6-d5 建立厚重兵链，随后坚决以 c5 冲击白方 d4 兵链根基。",
+      "strategy": {
+        "whiteIdea": "在推进变例中以 e5 封锁中央空间，利用王翼空间优势压迫黑王发起进攻。",
+        "blackIdea": "以稳固兵链抵挡白方攻势，集中火力猛轰白方 d4 兵链根基，并在后翼与半开放 c 线反客为主。",
+        "keyThemes": [
+          "e6-d5稳固兵链",
+          "c5反轰d4兵根",
+          "c8“法兰西坏象”活化",
+          "反击白方e5中心尖兵"
+        ]
+      },
+      "mainLine": [
+        {
+          "ply": 1,
+          "san": "e4",
+          "uci": "e2e4",
+          "comment": "白方占领中心",
+          "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+        },
+        {
+          "ply": 2,
+          "san": "e6",
+          "uci": "e7e6",
+          "comment": "法兰西防御标志！准备在下一步以 d5 强硬对抗白方中心！",
+          "fen": "rnbqkbnr/pppp1ppp/4p3/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+        },
+        {
+          "ply": 3,
+          "san": "d4",
+          "uci": "d2d4",
+          "comment": "白方顺势抢占双兵黄金中心。",
+          "fen": "rnbqkbnr/pppp1ppp/4p3/8/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2"
+        },
+        {
+          "ply": 4,
+          "san": "d5",
+          "uci": "d7d5",
+          "comment": "黑方如约挺出 d5 撞击白方 e4 中心兵！",
+          "fen": "rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3"
+        },
+        {
+          "ply": 5,
+          "san": "e5",
+          "uci": "e4e5",
+          "comment": "推进变例：白方挺兵封锁中央并夺取王翼广阔空间！",
+          "fen": "rnbqkbnr/ppp2ppp/4p3/3pP3/3P4/8/PPP2PPP/RNBQKBNR b KQkq - 0 3"
+        },
+        {
+          "ply": 6,
+          "san": "c5",
+          "uci": "c7c5",
+          "comment": "法兰西防御灵魂反击步！直接用 c 兵轰击白方 d4 兵链基石！",
+          "fen": "rnbqkbnr/pp3ppp/4p3/2ppP3/3P4/8/PPP2PPP/RNBQKBNR w KQkq - 0 4"
+        },
+        {
+          "ply": 7,
+          "san": "c3",
+          "uci": "c2c3",
+          "comment": "白方以 c 兵支撑 d4 兵链。",
+          "fen": "rnbqkbnr/pp3ppp/4p3/2ppP3/3P4/2P5/PP3PPP/RNBQKBNR b KQkq - 0 4"
+        },
+        {
+          "ply": 8,
+          "san": "Nc6",
+          "uci": "b8c6",
+          "comment": "黑马出动持续加压 d4 格！",
+          "fen": "r1bqkbnr/pp3ppp/2n1p3/2ppP3/3P4/2P5/PP3PPP/RNBQKBNR w KQkq - 1 5"
+        },
+        {
+          "ply": 9,
+          "san": "Nf3",
+          "uci": "g1f3",
+          "comment": "白马出动防守 d4！",
+          "fen": "r1bqkbnr/pp3ppp/2n1p3/2ppP3/3P4/2P2N2/PP3PPP/RNBQKB1R b KQkq - 2 5"
+        },
+        {
+          "ply": 10,
+          "san": "Qb6",
+          "uci": "d8b6",
+          "comment": "黑后出动形成三重大军围攻 d4 兵链，战况白热化！",
+          "fen": "r1b1kbnr/pp3ppp/1qn1p3/2ppP3/3P4/2P2N2/PP3PPP/RNBQKB1R w KQkq - 3 6"
+        }
+      ],
+      "variations": [
+        {
+          "id": "tarrasch_variation",
+          "name": "Tarrasch Variation",
+          "nameZh": "塔拉什变例",
+          "eco": "C03",
+          "description": "白方以 3. Nd2 出马避免被黑方 Bb4 牵制，保持阵型柔韧性。",
+          "moves": [
+            {
+              "ply": 1,
+              "san": "e4",
+              "uci": "e2e4",
+              "comment": "挺兵",
+              "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+            },
+            {
+              "ply": 2,
+              "san": "e6",
+              "uci": "e7e6",
+              "comment": "法兰西",
+              "fen": "rnbqkbnr/pppp1ppp/4p3/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+            },
+            {
+              "ply": 3,
+              "san": "d4",
+              "uci": "d2d4",
+              "comment": "占中心",
+              "fen": "rnbqkbnr/pppp1ppp/4p3/8/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2"
+            },
+            {
+              "ply": 4,
+              "san": "d5",
+              "uci": "d7d5",
+              "comment": "反冲 d5",
+              "fen": "rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3"
+            },
+            {
+              "ply": 5,
+              "san": "Nd2",
+              "uci": "b1d2",
+              "comment": "塔拉什变例！马出在 d2 保留 c 兵冲 c3 护中心的能力。",
+              "fen": "rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPPN1PPP/R1BQKBNR b KQkq - 1 3"
+            },
+            {
+              "ply": 6,
+              "san": "Nf6",
+              "uci": "g8f6",
+              "comment": "黑马出动反击 e4",
+              "fen": "rnbqkb1r/ppp2ppp/4pn2/3p4/3PP3/8/PPPN1PPP/R1BQKBNR w KQkq - 2 4"
+            },
+            {
+              "ply": 7,
+              "san": "e5",
+              "uci": "e4e5",
+              "comment": "白兵推进驱马",
+              "fen": "rnbqkb1r/ppp2ppp/4pn2/3pP3/3P4/8/PPPN1PPP/R1BQKBNR b KQkq - 0 4"
+            },
+            {
+              "ply": 8,
+              "san": "Nfd7",
+              "uci": "f6d7",
+              "comment": "黑马回退准备冲 c5",
+              "fen": "rnbqkb1r/pppn1ppp/4p3/3pP3/3P4/8/PPPN1PPP/R1BQKBNR w KQkq - 1 5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "caro_kann",
+      "name": "Caro-Kann Defense",
+      "nameZh": "卡罗·康防御",
+      "eco": "B10",
+      "type": "semi-open",
+      "typeNameZh": "半开放开局",
+      "badge": "稳若泰山 · 坚壁清野",
+      "shortDesc": "卡尔波夫的最爱武器！先走 c6 再走 d5，既筑起坚固防线，又完美避开了法兰西防御中 c8 象被堵死的弊端。",
+      "strategy": {
+        "whiteIdea": "在推进变例或古典变例中利用更多空间施压，限制黑象活动并谋求王翼进攻突破。",
+        "blackIdea": "从容将 c8 象调出至 f5/g4 活跃格，随后走 e6 构筑固若金汤的坚实兵链，在中残局依靠纯净无暇的兵形取胜。",
+        "keyThemes": [
+          "顺畅出动白格象",
+          "无破绽兵形结构",
+          "残局兵形胜势",
+          "卡尔波夫式防守反击"
+        ]
+      },
+      "mainLine": [
+        {
+          "ply": 1,
+          "san": "e4",
+          "uci": "e2e4",
+          "comment": "白方占领中心",
+          "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+        },
+        {
+          "ply": 2,
+          "san": "c6",
+          "uci": "c7c6",
+          "comment": "卡罗·康防御标志！准备下一步冲 d5，且为 c8 象留出自由出路！",
+          "fen": "rnbqkbnr/pp1ppppp/2p5/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+        },
+        {
+          "ply": 3,
+          "san": "d4",
+          "uci": "d2d4",
+          "comment": "白方占领中心",
+          "fen": "rnbqkbnr/pp1ppppp/2p5/8/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2"
+        },
+        {
+          "ply": 4,
+          "san": "d5",
+          "uci": "d7d5",
+          "comment": "黑方挺兵撞击 e4 中心！",
+          "fen": "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3"
+        },
+        {
+          "ply": 5,
+          "san": "Nc3",
+          "uci": "b1c3",
+          "comment": "白马出动防守 e4 兵（古典变例主线）。",
+          "fen": "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR b KQkq - 1 3"
+        },
+        {
+          "ply": 6,
+          "san": "dxe4",
+          "uci": "d5e4",
+          "comment": "黑方兑掉中心兵",
+          "fen": "rnbqkbnr/pp2pppp/2p5/8/3Pp3/2N5/PPP2PPP/R1BQKBNR w KQkq - 0 4"
+        },
+        {
+          "ply": 7,
+          "san": "Nxe4",
+          "uci": "c3e4",
+          "comment": "白马吃回中心",
+          "fen": "rnbqkbnr/pp2pppp/2p5/8/3PN3/8/PPP2PPP/R1BQKBNR b KQkq - 0 4"
+        },
+        {
+          "ply": 8,
+          "san": "Bf5",
+          "uci": "c8f5",
+          "comment": "卡罗·康精髓所在！白格象在走 e6 之前顺利出动至 f5 活跃格，威逼白马！",
+          "fen": "rn1qkbnr/pp2pppp/2p5/5b2/3PN3/8/PPP2PPP/R1BQKBNR w KQkq - 1 5"
+        },
+        {
+          "ply": 9,
+          "san": "Ng3",
+          "uci": "e4g3",
+          "comment": "白马躲避并反咬黑象。",
+          "fen": "rn1qkbnr/pp2pppp/2p5/5b2/3P4/6N1/PPP2PPP/R1BQKBNR b KQkq - 2 5"
+        },
+        {
+          "ply": 10,
+          "san": "Bg6",
+          "uci": "f5g6",
+          "comment": "黑象稳健回退至 g6 阵地。",
+          "fen": "rn1qkbnr/pp2pppp/2p3b1/8/3P4/6N1/PPP2PPP/R1BQKBNR w KQkq - 3 6"
+        },
+        {
+          "ply": 11,
+          "san": "h4",
+          "uci": "h2h4",
+          "comment": "白方挺 h 兵企图困死黑象。",
+          "fen": "rn1qkbnr/pp2pppp/2p3b1/8/3P3P/6N1/PPP2PP1/R1BQKBNR b KQkq - 0 6"
+        },
+        {
+          "ply": 12,
+          "san": "h6",
+          "uci": "h7h6",
+          "comment": "黑方挺 h6 为象留出 h7 退路，阵型完美无暇！",
+          "fen": "rn1qkbnr/pp2ppp1/2p3bp/8/3P3P/6N1/PPP2PP1/R1BQKBNR w KQkq - 0 7"
+        }
+      ],
+      "variations": [
+        {
+          "id": "advance_caro",
+          "name": "Advance Variation",
+          "nameZh": "推进变例",
+          "eco": "B12",
+          "description": "白方在第 3 步直接冲 e5 封锁空间，现代大师对局中极为流行。",
+          "moves": [
+            {
+              "ply": 1,
+              "san": "e4",
+              "uci": "e2e4",
+              "comment": "挺兵",
+              "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+            },
+            {
+              "ply": 2,
+              "san": "c6",
+              "uci": "c7c6",
+              "comment": "卡罗康",
+              "fen": "rnbqkbnr/pp1ppppp/2p5/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
+            },
+            {
+              "ply": 3,
+              "san": "d4",
+              "uci": "d2d4",
+              "comment": "占中心",
+              "fen": "rnbqkbnr/pp1ppppp/2p5/8/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2"
+            },
+            {
+              "ply": 4,
+              "san": "d5",
+              "uci": "d7d5",
+              "comment": "冲 d5",
+              "fen": "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3"
+            },
+            {
+              "ply": 5,
+              "san": "e5",
+              "uci": "e4e5",
+              "comment": "推进变例标志！",
+              "fen": "rnbqkbnr/pp2pppp/2p5/3pP3/3P4/8/PPP2PPP/RNBQKBNR b KQkq - 0 3"
+            },
+            {
+              "ply": 6,
+              "san": "Bf5",
+              "uci": "c8f5",
+              "comment": "黑象依然顺畅出动到 f5 活跃格！",
+              "fen": "rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/8/PPP2PPP/RNBQKBNR w KQkq - 1 4"
+            },
+            {
+              "ply": 7,
+              "san": "Nf3",
+              "uci": "g1f3",
+              "comment": "白马出动",
+              "fen": "rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/5N2/PPP2PPP/RNBQKB1R b KQkq - 2 4"
+            },
+            {
+              "ply": 8,
+              "san": "e6",
+              "uci": "e7e6",
+              "comment": "黑方关上大门，构筑稳固防线！",
+              "fen": "rn1qkbnr/pp3ppp/2p1p3/3pPb2/3P4/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "queens_gambit",
+      "name": "Queen's Gambit",
+      "nameZh": "后翼弃兵",
+      "eco": "D06",
+      "type": "closed",
+      "typeNameZh": "封闭开局",
+      "badge": "王道正统 · 宏大构架",
+      "shortDesc": "封闭开局中地位最崇高的开局！白方主动在第 2 步奉献 c4 边兵，旨在换取中央彻底统治权与主动出子速度。",
+      "strategy": {
+        "whiteIdea": "以 c4 兵引诱黑方 d5 兵放弃中心控制，一旦黑方吃兵（接受弃兵），白方可轻松占领全中央并夺回该兵。",
+        "blackIdea": "拒绝弃兵以 e6 坚守中心，或接受弃兵后迅速以 c5 反击白方中央兵阵。",
+        "keyThemes": [
+          "假弃兵真夺中心",
+          "拒绝弃兵稳守d5",
+          "少数民族进攻",
+          "卡尔斯巴德兵形结构"
+        ]
+      },
+      "mainLine": [
+        {
+          "ply": 1,
+          "san": "d4",
+          "uci": "d2d4",
+          "comment": "白方挺进后兵，稳健控制 e5/c5 中心要道。",
+          "fen": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1"
+        },
+        {
+          "ply": 2,
+          "san": "d5",
+          "uci": "d7d5",
+          "comment": "黑方后兵应对，建立对称中心对峙。",
+          "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 2"
+        },
+        {
+          "ply": 3,
+          "san": "c4",
+          "uci": "c2c4",
+          "comment": "后翼弃兵标志！奉献 c 兵挑战黑方 d5 根基，实为假弃兵！",
+          "fen": "rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b KQkq - 0 2"
+        },
+        {
+          "ply": 4,
+          "san": "e6",
+          "uci": "e7e6",
+          "comment": "后翼拒弃兵：黑方坚决不吃，以 e6 强力支撑 d5 核心要塞！",
+          "fen": "rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq - 0 3"
+        },
+        {
+          "ply": 5,
+          "san": "Nc3",
+          "uci": "b1c3",
+          "comment": "白马出动强化对 d5 的压迫。",
+          "fen": "rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR b KQkq - 1 3"
+        },
+        {
+          "ply": 6,
+          "san": "Nf6",
+          "uci": "g8f6",
+          "comment": "黑马出动增援 d5 堡垒防守。",
+          "fen": "rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq - 2 4"
+        },
+        {
+          "ply": 7,
+          "san": "Bg5",
+          "uci": "c1g5",
+          "comment": "白象出动牵制黑方 f6 马，削弱 d5 的防守力量！",
+          "fen": "rnbqkb1r/ppp2ppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR b KQkq - 3 4"
+        },
+        {
+          "ply": 8,
+          "san": "Be7",
+          "uci": "f8e7",
+          "comment": "黑象出动化解牵制，为易位做准备。",
+          "fen": "rnbqk2r/ppp1bppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR w KQkq - 4 5"
+        },
+        {
+          "ply": 9,
+          "san": "e3",
+          "uci": "e2e3",
+          "comment": "白方巩固 c4 兵链，并为王格白象打开大门。",
+          "fen": "rnbqk2r/ppp1bppp/4pn2/3p2B1/2PP4/2N1P3/PP3PPP/R2QKBNR b KQkq - 0 5"
+        },
+        {
+          "ply": 10,
+          "san": "O-O",
+          "uci": "e8g8",
+          "comment": "黑方率先完成王车易位，双方步入深邃严谨的封闭格局。",
+          "fen": "rnbq1rk1/ppp1bppp/4pn2/3p2B1/2PP4/2N1P3/PP3PPP/R2QKBNR w KQ - 1 6"
+        }
+      ],
+      "variations": [
+        {
+          "id": "qga",
+          "name": "Queen's Gambit Accepted",
+          "nameZh": "接受后翼弃兵",
+          "eco": "D20",
+          "description": "黑方吃掉 c4 兵，随后通过快速出子反击白方中心。",
+          "moves": [
+            {
+              "ply": 1,
+              "san": "d4",
+              "uci": "d2d4",
+              "comment": "挺后兵",
+              "fen": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1"
+            },
+            {
+              "ply": 2,
+              "san": "d5",
+              "uci": "d7d5",
+              "comment": "应对",
+              "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 2"
+            },
+            {
+              "ply": 3,
+              "san": "c4",
+              "uci": "c2c4",
+              "comment": "后翼弃兵",
+              "fen": "rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b KQkq - 0 2"
+            },
+            {
+              "ply": 4,
+              "san": "dxc4",
+              "uci": "d5c4",
+              "comment": "接受弃兵！黑方吃掉 c4 兵。",
+              "fen": "rnbqkbnr/ppp1pppp/8/8/2pP4/8/PP2PPPP/RNBQKBNR w KQkq - 0 3"
+            },
+            {
+              "ply": 5,
+              "san": "Nf3",
+              "uci": "g1f3",
+              "comment": "白马出动阻止黑方冲 e5",
+              "fen": "rnbqkbnr/ppp1pppp/8/8/2pP4/5N2/PP2PPPP/RNBQKB1R b KQkq - 1 3"
+            },
+            {
+              "ply": 6,
+              "san": "Nf6",
+              "uci": "g8f6",
+              "comment": "黑马出动",
+              "fen": "rnbqkb1r/ppp1pppp/5n2/8/2pP4/5N2/PP2PPPP/RNBQKB1R w KQkq - 2 4"
+            },
+            {
+              "ply": 7,
+              "san": "e3",
+              "uci": "e2e3",
+              "comment": "白方准备用象吃回 c4 兵。",
+              "fen": "rnbqkb1r/ppp1pppp/5n2/8/2pP4/4PN2/PP3PPP/RNBQKB1R b KQkq - 0 4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "slav_defense",
+      "name": "Slav Defense",
+      "nameZh": "斯拉夫防御",
+      "eco": "D10",
+      "type": "closed",
+      "typeNameZh": "封闭开局",
+      "badge": "金城汤池 · 现代宠儿",
+      "shortDesc": "对抗后翼弃兵最坚固、最受当代特级大师信赖的钢铁防线！以 c6 守住 d5，保留 c8 象的自由行动力。",
+      "strategy": {
+        "whiteIdea": "在兑子变例或主变中建立中央空间优势，利用 a4 抑制黑方后翼扩张，争取轻子主导权。",
+        "blackIdea": "通过 c6 巩固 d5 堡垒，随后顺利将 c8 象出动至 f5 活跃格，避免后翼拒弃兵中坏象困境。",
+        "keyThemes": [
+          "c6稳固d5要塞",
+          "活化c8白格象",
+          "后翼b5兵扩张",
+          "半斯拉夫锋利对攻"
+        ]
+      },
+      "mainLine": [
+        {
+          "ply": 1,
+          "san": "d4",
+          "uci": "d2d4",
+          "comment": "挺后兵",
+          "fen": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1"
+        },
+        {
+          "ply": 2,
+          "san": "d5",
+          "uci": "d7d5",
+          "comment": "争夺中心",
+          "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 2"
+        },
+        {
+          "ply": 3,
+          "san": "c4",
+          "uci": "c2c4",
+          "comment": "后翼弃兵",
+          "fen": "rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b KQkq - 0 2"
+        },
+        {
+          "ply": 4,
+          "san": "c6",
+          "uci": "c7c6",
+          "comment": "斯拉夫防御标志！用 c 兵坚实守卫 d5 核心，且不堵塞 c8 象！",
+          "fen": "rnbqkbnr/pp2pppp/2p5/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq - 0 3"
+        },
+        {
+          "ply": 5,
+          "san": "Nf3",
+          "uci": "g1f3",
+          "comment": "白马出动控制 e5",
+          "fen": "rnbqkbnr/pp2pppp/2p5/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R b KQkq - 1 3"
+        },
+        {
+          "ply": 6,
+          "san": "Nf6",
+          "uci": "g8f6",
+          "comment": "黑马出动控制 e4",
+          "fen": "rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq - 2 4"
+        },
+        {
+          "ply": 7,
+          "san": "Nc3",
+          "uci": "b1c3",
+          "comment": "白马加码施压 d5",
+          "fen": "rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq - 3 4"
+        },
+        {
+          "ply": 8,
+          "san": "dxc4",
+          "uci": "d5c4",
+          "comment": "黑方吃掉 c4 兵转入开放斯拉夫！",
+          "fen": "rnbqkb1r/pp2pppp/2p2n2/8/2pP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 0 5"
+        },
+        {
+          "ply": 9,
+          "san": "a4",
+          "uci": "a2a4",
+          "comment": "白方挺 a4 极为关键：彻底切断黑方走 b5 护兵的妄想！",
+          "fen": "rnbqkb1r/pp2pppp/2p2n2/8/P1pP4/2N2N2/1P2PPPP/R1BQKB1R b KQkq - 0 5"
+        },
+        {
+          "ply": 10,
+          "san": "Bf5",
+          "uci": "c8f5",
+          "comment": "斯拉夫精髓！黑象抢在白方走 e3 之前顺利占领 f5 活跃对角线！",
+          "fen": "rn1qkb1r/pp2pppp/2p2n2/5b2/P1pP4/2N2N2/1P2PPPP/R1BQKB1R w KQkq - 1 6"
+        },
+        {
+          "ply": 11,
+          "san": "e3",
+          "uci": "e2e3",
+          "comment": "白方准备以象收复 c4 兵。",
+          "fen": "rn1qkb1r/pp2pppp/2p2n2/5b2/P1pP4/2N1PN2/1P3PPP/R1BQKB1R b KQkq - 0 6"
+        },
+        {
+          "ply": 12,
+          "san": "e6",
+          "uci": "e7e6",
+          "comment": "黑方稳健关门，阵型坚固如铁，轻子全面活跃！",
+          "fen": "rn1qkb1r/pp3ppp/2p1pn2/5b2/P1pP4/2N1PN2/1P3PPP/R1BQKB1R w KQkq - 0 7"
+        }
+      ],
+      "variations": [
+        {
+          "id": "semi_slav",
+          "name": "Semi-Slav Defense",
+          "nameZh": "半斯拉夫防御",
+          "eco": "D43",
+          "description": "黑方既走 c6 又走 e6，构筑不可撼动的三角核心堡垒，中局反弹力极强。",
+          "moves": [
+            {
+              "ply": 1,
+              "san": "d4",
+              "uci": "d2d4",
+              "comment": "挺兵",
+              "fen": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1"
+            },
+            {
+              "ply": 2,
+              "san": "d5",
+              "uci": "d7d5",
+              "comment": "应对",
+              "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 2"
+            },
+            {
+              "ply": 3,
+              "san": "c4",
+              "uci": "c2c4",
+              "comment": "后翼弃兵",
+              "fen": "rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b KQkq - 0 2"
+            },
+            {
+              "ply": 4,
+              "san": "c6",
+              "uci": "c7c6",
+              "comment": "斯拉夫",
+              "fen": "rnbqkbnr/pp2pppp/2p5/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq - 0 3"
+            },
+            {
+              "ply": 5,
+              "san": "Nf3",
+              "uci": "g1f3",
+              "comment": "出马",
+              "fen": "rnbqkbnr/pp2pppp/2p5/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R b KQkq - 1 3"
+            },
+            {
+              "ply": 6,
+              "san": "Nf6",
+              "uci": "g8f6",
+              "comment": "出马",
+              "fen": "rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq - 2 4"
+            },
+            {
+              "ply": 7,
+              "san": "Nc3",
+              "uci": "b1c3",
+              "comment": "加压",
+              "fen": "rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq - 3 4"
+            },
+            {
+              "ply": 8,
+              "san": "e6",
+              "uci": "e7e6",
+              "comment": "半斯拉夫标志！c6+e6 构筑三角超级三角堡垒！",
+              "fen": "rnbqkb1r/pp3ppp/2p1pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 0 5"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
